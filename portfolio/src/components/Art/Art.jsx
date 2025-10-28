@@ -1,9 +1,7 @@
 import Navigation from "../Navigation";
-// import { SnavLink } from "react-router-dom";
 import SnavLink from "../SnavLink";
+import { NavLink } from "react-router-dom";
 function Art() {
-  const body = document.body;
-  body.className = "default-bg";
   let projects = [
     {
       id: 0,
@@ -55,28 +53,23 @@ function Art() {
     },
   ];
   return (
-    <div className="artContainer">
-      <div className="NavigationDiv">
-        <Navigation />
-      </div>
-      <div className="artTitle">
-        <h2>Projects</h2>
-      </div>
-
-      <div className="projectContainer">
+    <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
+      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
+      <Navigation />
+      <div className="flex flex-col gap-4 max-w-1/2">
         {projects.map((project) => (
-          <div className="projectDiv" key={project.id}>
+          <div className="flex flex-col border-2 items-center" key={project.id}>
             <h2>
-              <SnavLink to={project.link}>{project.title}</SnavLink>
+              <SnavLink to={project.link} className="font-bold">{project.title}</SnavLink>
             </h2>
-            <p className="projectDesc">{project.description}</p>
-            <p className="projectText">
+            <p className="">{project.description}</p>
+            <p className="">
               <b>Medium</b>: {project.medium}
             </p>
-            <p className="projectText">
+            <p className="">
               <b>Date</b>: {project.date}
             </p>
-            <img className="projectImage" src={project.image} />
+            <img className="w-full max-w-3xs" src={project.image} />
           </div>
         ))}
       </div>
