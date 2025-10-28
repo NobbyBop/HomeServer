@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import Navigation from "../Navigation";
 function Art_Comfort() {
   const body = document.body;
   body.className = "default-bg";
@@ -51,8 +51,8 @@ function Art_Comfort() {
 
   return (
     <div className="sketchOuterContainer">
-      <div className="navBarDiv">
-        <NavBar scrollText="ARE YOU COMFORTABLE? NO? GET COMFORTABLE! DO YOU ALWAYS LOOK LIKE THAT? ARE YOU COMFORTABLE? NO? GET COMFORTABLE! DO YOU ALWAYS LOOK LIKE THAT?" />
+      <div className="NavigationDiv">
+        <Navigation scrollText="ARE YOU COMFORTABLE? NO? GET COMFORTABLE! DO YOU ALWAYS LOOK LIKE THAT? ARE YOU COMFORTABLE? NO? GET COMFORTABLE! DO YOU ALWAYS LOOK LIKE THAT?" />
       </div>
       <div className="sketchTitle">
         <h2>On Comfort...</h2>

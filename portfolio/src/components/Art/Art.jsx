@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import Navigation from "../Navigation";
 // import { SnavLink } from "react-router-dom";
 import SnavLink from "../SnavLink";
 function Art() {
@@ -56,8 +56,8 @@ function Art() {
   ];
   return (
     <div className="artContainer">
-      <div className="navBarDiv">
-        <NavBar />
+      <div className="NavigationDiv">
+        <Navigation />
       </div>
       <div className="artTitle">
         <h2>Projects</h2>

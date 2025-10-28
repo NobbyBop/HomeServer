@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import Navigation from "../Navigation";
 function Art_Mobius() {
   const body = document.body;
   body.className = "default-bg";
@@ -43,8 +43,8 @@ function Art_Mobius() {
 
   return (
     <div className="sketchOuterContainer">
-      <div className="navBarDiv">
-        <NavBar scrollText="HAVE YOU HEARD THIS SONG? HAVE YOU HEARD THIS SONG? HAVE YOU HEARD THIS SONG? HAVE YOU HEARD THIS SONG?" />
+      <div className="NavigationDiv">
+        <Navigation scrollText="HAVE YOU HEARD THIS SONG? HAVE YOU HEARD THIS SONG? HAVE YOU HEARD THIS SONG? HAVE YOU HEARD THIS SONG?" />
       </div>
       <div className="sketchTitle">
         <img

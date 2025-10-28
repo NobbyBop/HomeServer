@@ -1,4 +1,4 @@
-import NavBar from "./NavBar";
+import Navigation from "./Navigation";
 function Photography() {
   let body = document.body;
   body.className = "photography-bg";
@@ -42,8 +42,8 @@ function Photography() {
 
   return (
     <div className="photoContainer">
-      <div className="navBarDiv">
-        <NavBar scrollText="HAVE YOU GONE OUTSIDE TODAY? TAKE A PHOTO AND PROVE IT. YOU MIGHT SEE SOMETHING PRETTY. HAVE YOU GONE OUTSIDE TODAY? TAKE A PHOTO AND PROVE IT. YOU MIGHT SEE SOMETHING PRETTY." />
+      <div className="NavigationDiv">
+        <Navigation scrollText="HAVE YOU GONE OUTSIDE TODAY? TAKE A PHOTO AND PROVE IT. YOU MIGHT SEE SOMETHING PRETTY. HAVE YOU GONE OUTSIDE TODAY? TAKE A PHOTO AND PROVE IT. YOU MIGHT SEE SOMETHING PRETTY." />
       </div>
       <div className="photoBody">
         <h2>PHOTOGRAPHY</h2>

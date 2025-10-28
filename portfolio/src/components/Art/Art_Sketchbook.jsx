@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import Navigation from "../Navigation";
 function Art_Sketchbook() {
   const body = document.body;
   body.className = "default-bg";
@@ -99,8 +99,8 @@ function Art_Sketchbook() {
 
   return (
     <div className="sketchOuterContainer">
-      <div className="navBarDiv">
-        <NavBar scrollText="YOU'RE IN THE TRENCHES NOW. THIS IS THE LAST STOP. ARE YOU READY FOR THE END? YOU'RE IN THE TRENCHES NOW. THIS IS THE LAST STOP. ARE YOU READY FOR THE END?" />
+      <div className="NavigationDiv">
+        <Navigation scrollText="YOU'RE IN THE TRENCHES NOW. THIS IS THE LAST STOP. ARE YOU READY FOR THE END? YOU'RE IN THE TRENCHES NOW. THIS IS THE LAST STOP. ARE YOU READY FOR THE END?" />
       </div>
       <div className="sketchTitle">
         <h2>Sketchbook</h2>

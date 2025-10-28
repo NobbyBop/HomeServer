@@ -1,39 +1,19 @@
-import NavBar from "./NavBar";
+import { NavLink } from "react-router-dom";
+import Navigation from "./Navigation";
 function Home() {
-  const body = document.body;
-  body.className = "home-bg";
   return (
-    <div className="homeContainer">
-      <div>
-        <NavBar scrollText="WHO IS THIS GUY? WHAT DOES HE WANT FROM YOU? WHAT IS HE SMILING ABOUT? WHO IS THIS GUY? WHAT DOES HE WANT FROM YOU? WHAT IS HE SMILING ABOUT?" />
-      </div>
-      <div className="homeInnerContainer1">
-        <div className="homeTextDiv">
-          <h2>About</h2>
-          <p className="homeText">
-            I am a Computer Science student at Stevens Institute of Technology,
-            pursuing a minor in Visual Arts & Technology. My work consists
-            primarily of ballpoint pen drawings, but spans a wide array of
-            mediums. I have done work in web design, graphic design,
-            photography, videography, collage, poetry, and creative writing (and
-            even a little music composition.) <br />
-            This website is a platform for me to share all of my creative
-            endeavors, thanks for checking it out!
-            <br />
-            Inquiries can be sent to{" "}
-            <a href="mailto:nicholasmirigliani@gmail.com">
-              nicholasmirigliani@gmail.com
-            </a>
-            .
-          </p>
-        </div>
-        <img
-          className="homeImage"
-          src="/images/me.JPEG"
-        />
-      </div>
-      <div className="homeInnerContainer2">
-        <h2>Links</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-serif">
+      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
+      <Navigation/>
+      <img
+        className="w-full max-w-3xs"
+        src="/images/me.JPEG"
+      />
+      <p className="max-w-1/2">
+        Insert a long piece of text here.
+      </p>
+
+      <div className="flex gap-2">
         <a target="_blank" href="https://www.youtube.com/@nobbybop">
           YouTube
         </a>

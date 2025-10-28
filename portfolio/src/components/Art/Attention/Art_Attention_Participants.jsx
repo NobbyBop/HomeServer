@@ -1,14 +1,14 @@
 // import { SnavLink } from "react-router-dom";
 import SnavLink from "../../SnavLink";
-import NavBar from "../../NavBar";
+import Navigation from "../../Navigation";
 const body = document.body;
 body.className = "default-bg";
 function Art_Attention() {
   const pageList = Array.from({ length: 5 }, (_, i) => (i + 1).toString());
   return (
     <div className="attentionOuterContainer">
-      <div className="navBarDiv">
-        <NavBar scrollText="ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION!" />
+      <div className="NavigationDiv">
+        <Navigation scrollText="ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION! ATTENTION!" />
       </div>
       <div className="attentionBody">
         <img
