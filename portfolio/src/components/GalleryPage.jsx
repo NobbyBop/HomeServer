@@ -6,11 +6,13 @@ function GalleryPage({
   description,
   items,
   imageFolder,
+  backgroundImageUrl,
   headerImages = [],
   showCaptions = true,
 }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4 p-4">
+    <div className={`bg-[url('${backgroundImageUrl}')] bg-center p-4`}>
+    <div className="flex flex-col items-center justify-center min-h-screen font-serif">
       <Navigation displayName="true"/>
       {headerImages.map((img, index) => (
         <img key={index} className={img.className} src={img.src} />
@@ -32,6 +34,7 @@ function GalleryPage({
           items.map((name, index) => <img key={index} src={`${imageFolder}${name}`} />)
         )}
       </div>
+    </div>
     </div>
   );
 }

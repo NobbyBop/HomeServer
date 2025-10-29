@@ -53,11 +53,12 @@ function Art() {
     },
   ];
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
+    <div className={`bg-[url()] bg-center p-4`}>
+    <div className="flex flex-col items-center justify-center min-h-screen font-serif">
       <Navigation displayName="true"/>
-      <div className="flex flex-col gap-4 max-w-1/2">
+      <div className="flex flex-col gap-4 lg:max-w-1/3 sm:max-w-1/2">
         {projects.map((project) => (
-          <div className="flex flex-col border-2 items-center" key={project.id}>
+          <div className="flex flex-col border-2 items-center bg-white" key={project.id}>
             <h2>
               <SnavLink to={project.link} className="font-bold">{project.title}</SnavLink>
             </h2>
@@ -72,6 +73,7 @@ function Art() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

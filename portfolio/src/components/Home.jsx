@@ -2,11 +2,12 @@ import { NavLink } from "react-router-dom";
 import Navigation from "./Navigation";
 function Home() {
   return (
+    <div className={`bg-[url('/images/backgrounds/OS2.JPG')] bg-position-[center_top_80%]`}>
     <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-serif">
       <Navigation displayName="true"/>
       <img
-        className="w-full max-w-3xs"
-        src="/images/me.JPEG"
+        className="w-full lg:max-w-1/3 md:max-w-1/2"
+        src="/images/me_frame_shadow.png"
       />
       <p className="max-w-1/2">
         Insert a long piece of text here.
@@ -32,6 +33,7 @@ function Home() {
           Résumé
         </a>
       </div>
+    </div>
     </div>
   );
 }

@@ -338,7 +338,7 @@ const photographyConfig = {
 
 function App() {
   return (
-    <>
+    <div>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
@@ -362,7 +362,7 @@ function App() {
         <Route path="/art/mobiusline" element={<GalleryPage {...mobiusConfig} />} />
         <Route path="/photography" element={<GalleryPage {...photographyConfig} />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
