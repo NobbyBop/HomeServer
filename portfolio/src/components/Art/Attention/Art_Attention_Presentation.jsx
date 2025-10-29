@@ -1,15 +1,13 @@
 // import { SnavLink } from "react-router-dom";
 import SnavLink from "../../SnavLink";
 import Navigation from "../../Navigation";
-import { NavLink } from "react-router-dom";
 function Art_Attention() {
   const body = document.body;
   body.className = "default-bg";
   const pageList = Array.from({ length: 23 }, (_, i) => (i + 1).toString());
   return (
     <div className="flex flex-col items-center justify-center min-h-screen font-roboto gap-4">
-    <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
-    <Navigation />
+    <Navigation displayName="true"/>
       <img
         className="max-w-3xs"
         src={`/attention/title.png`}

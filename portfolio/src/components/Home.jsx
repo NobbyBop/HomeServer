@@ -3,8 +3,7 @@ import Navigation from "./Navigation";
 function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-serif">
-      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
-      <Navigation/>
+      <Navigation displayName="true"/>
       <img
         className="w-full max-w-3xs"
         src="/images/me.JPEG"

@@ -54,8 +54,7 @@ function Art() {
   ];
   return (
     <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
-      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
-      <Navigation />
+      <Navigation displayName="true"/>
       <div className="flex flex-col gap-4 max-w-1/2">
         {projects.map((project) => (
           <div className="flex flex-col border-2 items-center" key={project.id}>

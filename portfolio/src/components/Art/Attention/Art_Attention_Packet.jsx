@@ -7,8 +7,7 @@ function Art_Attention() {
   const pageList = Array.from({ length: 18 }, (_, i) => (i + 1).toString());
   return (
     <div className="flex flex-col items-center justify-center min-h-screen font-roboto gap-4">
-    <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
-    <Navigation />
+    <Navigation displayName="true"/>
       <img
         className="max-w-3xs"
         src={`/attention/title.png`}

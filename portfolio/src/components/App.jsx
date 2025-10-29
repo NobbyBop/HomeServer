@@ -6,7 +6,6 @@ import Art_Attention from "./Art/Attention/Art_Attention";
 import Art_Attention_Packet from "./Art/Attention/Art_Attention_Packet";
 import Art_Attention_Presentation from "./Art/Attention/Art_Attention_Presentation";
 import Art_Attention_Participants from "./Art/Attention/Art_Attention_Participants";
-import Blog from "./Blog";
 import GalleryPage from "./GalleryPage";
 
 const comfortConfig = {
@@ -227,7 +226,7 @@ const sketchbookConfig = {
 };
 
 const mobiusConfig = {
-  title: "MOBIUS LINE",
+  title: "",
   description: (
     <>
       MOBIUS LINE is an ARG (Augmented Reality Game) that I co-created with
@@ -362,7 +361,6 @@ function App() {
         />
         <Route path="/art/mobiusline" element={<GalleryPage {...mobiusConfig} />} />
         <Route path="/photography" element={<GalleryPage {...photographyConfig} />} />
-        <Route path="/blog" element={<Blog />} />
       </Routes>
     </>
   );
