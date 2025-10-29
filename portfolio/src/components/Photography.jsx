@@ -1,4 +1,5 @@
 import Navigation from "./Navigation";
+import { NavLink } from "react-router-dom";
 function Photography() {
   let body = document.body;
   body.className = "photography-bg";
@@ -41,21 +42,15 @@ function Photography() {
   photoNames = photoNames.reverse();
 
   return (
-    <div className="photoContainer">
-      <div className="NavigationDiv">
-        <Navigation scrollText="HAVE YOU GONE OUTSIDE TODAY? TAKE A PHOTO AND PROVE IT. YOU MIGHT SEE SOMETHING PRETTY. HAVE YOU GONE OUTSIDE TODAY? TAKE A PHOTO AND PROVE IT. YOU MIGHT SEE SOMETHING PRETTY." />
-      </div>
-      <div className="photoBody">
-        <h2>PHOTOGRAPHY</h2>
-        <p>Taken on a Canon PowerShot ELPH 190 IS. (Most recent to oldest.)</p>
-        <div className="photosDiv">
-          {photoNames.map((name) => (
-            <img
-              className="photo"
-              src={`/photos/${name}`}
-            />
-          ))}
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
+      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
+      <Navigation/>
+      <h2>PHOTOGRAPHY</h2>
+      <p className="max-w-1/2">Taken on a Canon PowerShot ELPH 190 IS. (Most recent to oldest.)</p>
+      <div className="flex flex-col gap-4 max-w-1/2">
+        {photoNames.map((name) => (
+          <img src={`/photos/${name}`}/>
+        ))}
       </div>
     </div>
   );

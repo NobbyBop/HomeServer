@@ -1,4 +1,5 @@
 import Navigation from "../Navigation";
+import { NavLink } from "react-router-dom";
 function Art_Comfort() {
   const body = document.body;
   body.className = "default-bg";
@@ -50,27 +51,24 @@ function Art_Comfort() {
   ];
 
   return (
-    <div className="sketchOuterContainer">
-      <div className="NavigationDiv">
-        <Navigation scrollText="ARE YOU COMFORTABLE? NO? GET COMFORTABLE! DO YOU ALWAYS LOOK LIKE THAT? ARE YOU COMFORTABLE? NO? GET COMFORTABLE! DO YOU ALWAYS LOOK LIKE THAT?" />
-      </div>
-      <div className="sketchTitle">
-        <h2>On Comfort...</h2>
-        <p>
-          "On Comfort..." is a series of 6 drawings I did over 2024. My initial
-          concept, as you'll see below, was to capture the feeling of those
-          places that we grow comfortable in, especially those that we'll never
-          see again. A dorm room, a friend's apartment. This expanded to
-          exploring the feeling of comfort across a range of situations.
-          Comfortability in your own skin, comfortability in your mind. This
-          project ultimately strayed away from that initial concept but resulted
-          in a distinct set of drawings regardless.
-        </p>
-      </div>
-      <div className="sketchContainer">
+     <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
+      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
+      <Navigation/>
+      <h2>On Comfort...</h2>
+      <p className="max-w-1/2">
+        "On Comfort..." is a series of 6 drawings I did over 2024. My initial
+        concept, as you'll see below, was to capture the feeling of those
+        places that we grow comfortable in, especially those that we'll never
+        see again. A dorm room, a friend's apartment. This expanded to
+        exploring the feeling of comfort across a range of situations.
+        Comfortability in your own skin, comfortability in your mind. This
+        project ultimately strayed away from that initial concept but resulted
+        in a distinct set of drawings regardless.
+      </p>
+      <div className="flex flex-col gap-4 max-w-1/2">
         {items.map((project) => (
-          <div className="sketchDiv" key={project.id}>
-            <img className="sketchImage" src={project.image} />
+          <div className="border-2" key={project.id}>
+            <img src={project.image} />
             <h2>{project.title}</h2>
             <p>{project.comment}</p>
           </div>

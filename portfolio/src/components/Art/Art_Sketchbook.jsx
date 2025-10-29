@@ -1,4 +1,5 @@
 import Navigation from "../Navigation";
+import { NavLink } from "react-router-dom";
 function Art_Sketchbook() {
   const body = document.body;
   body.className = "default-bg";
@@ -98,24 +99,21 @@ function Art_Sketchbook() {
   ];
 
   return (
-    <div className="sketchOuterContainer">
-      <div className="NavigationDiv">
-        <Navigation scrollText="YOU'RE IN THE TRENCHES NOW. THIS IS THE LAST STOP. ARE YOU READY FOR THE END? YOU'RE IN THE TRENCHES NOW. THIS IS THE LAST STOP. ARE YOU READY FOR THE END?" />
-      </div>
-      <div className="sketchTitle">
-        <h2>Sketchbook</h2>
-        <p>
+    <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
+      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
+      <Navigation/>
+        <h2 className="max-w-1/2">Sketchbook</h2>
+        <p className="max-w-1/2">
           These are some of my favorite sketches I've done on over the past few
           years (starting circa 2022). Most are done in ballpoint pen, although
           some use other kinds of ink pens. This sketchbook has been a primary
           emotional outlet for me for the past few years, and these pieces
           articulate the sense of style I've developed over that time.
         </p>
-      </div>
-      <div className="sketchContainer">
+      <div className="flex flex-col gap-4 max-w-1/2">
         {items.map((project) => (
-          <div className="sketchDiv" key={project.id}>
-            <img className="sketchImage" src={project.image} />
+          <div className="border-2" key={project.id}>
+            <img src={project.image} />
             <h2>{project.title}</h2>
             <p>{project.comment}</p>
           </div>

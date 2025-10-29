@@ -1,4 +1,5 @@
 import Navigation from "../Navigation";
+import { NavLink } from "react-router-dom";
 function Art_Worldly() {
   const body = document.body;
   body.className = "default-bg";
@@ -60,13 +61,11 @@ function Art_Worldly() {
   ];
 
   return (
-    <div className="sketchOuterContainer">
-      <div className="NavigationDiv">
-        <Navigation scrollText="STOP PHILOSOPHY. WHO CARES? TV IS GOD. SUBSTANCE ANXIETY. BREAKDOWN. STOP PHILOSOPHY. WHO CARES? TV IS GOD. SUBSTANCE ANXIETY. BREAKDOWN." />
-      </div>
-      <div className="sketchTitle">
+    <div className="flex flex-col items-center justify-center min-h-screen font-serif gap-4">
+      <NavLink to={"/"}>Nicholas Mirigliani</NavLink>
+      <Navigation/>
         <h2>WORLDLY</h2>
-        <p>
+        <p className="max-w-1/2">
           WORLDLY is a zine I worked on at the end of 2023. It was a time I felt
           that I had been consumed with worries of career and social status. I
           noticed my own departure from philisophical and spiritual
@@ -74,11 +73,10 @@ function Art_Worldly() {
           and commercialism. This was my (somewhat successful) attempt to
           reshift my focus to things that really matter.
         </p>
-      </div>
-      <div className="sketchContainer">
+      <div className="flex flex-col gap-4 max-w-1/2">
         {items.map((project) => (
-          <div className="sketchDiv" key={project.id}>
-            <img className="sketchImage" src={project.image} />
+          <div className="border-2" key={project.id}>
+            <img src={project.image} />
             <h2>{project.title}</h2>
             <p>{project.comment}</p>
           </div>
