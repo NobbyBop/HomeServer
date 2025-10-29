@@ -343,6 +343,8 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/art" element={<Art />} />
+        
+         <Route path="/art/photography" element={<GalleryPage {...photographyConfig} />} />
         <Route path="/art/sketchbook" element={<GalleryPage {...sketchbookConfig} />} />
         <Route path="/art/comfort" element={<GalleryPage {...comfortConfig} />} />
         <Route path="/art/worldly" element={<GalleryPage {...worldlyConfig} />} />
@@ -360,7 +362,7 @@ function App() {
           element={<Art_Attention_Participants />}
         />
         <Route path="/art/mobiusline" element={<GalleryPage {...mobiusConfig} />} />
-        <Route path="/photography" element={<GalleryPage {...photographyConfig} />} />
+       
       </Routes>
     </div>
   );

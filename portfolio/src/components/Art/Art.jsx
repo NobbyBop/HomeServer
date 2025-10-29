@@ -1,6 +1,5 @@
 import Navigation from "../Navigation";
 import SnavLink from "../SnavLink";
-import { NavLink } from "react-router-dom";
 function Art() {
   let projects = [
     {
@@ -14,7 +13,7 @@ function Art() {
               image: `/attention/thumbnail.png`,
     },
     {
-      id: 777,
+      id: 1,
       title: "MOBIUS LINE",
       description:
         "An ARG (Augmented Reality Game) co-developed with Sumner Badzik. Players had to solve the mystery of MOBIUS LINE's unreleased song.",
@@ -24,7 +23,7 @@ function Art() {
               image: `/mobius/thumbnail.jpg`,
     },
     {
-      id: 1,
+      id: 2,
       title: "'On Comfort...'",
       description: "A series of drawings exploring the concept of comfort.",
       medium: "Ink",
@@ -33,7 +32,7 @@ function Art() {
               image: `/comfort/thumbnail.JPG`,
     },
     {
-      id: 2,
+      id: 3,
       title: "'WORLDLY'",
       description:
         "A zine about my experience with materialism, overconsumption, and identity.",
@@ -43,7 +42,7 @@ function Art() {
               image: `/worldly/thumbnail.JPG`,
     },
     {
-      id: 0,
+      id: 4,
       title: "Sketchbook",
       description: "Some of my favorite sketches, old and new.",
       medium: "Ballpoint pen",
@@ -51,6 +50,15 @@ function Art() {
       link: "/art/sketchbook",
               image: `/sketchbook/thumbnail.JPG`,
     },
+    {
+      id: 5,
+      title: "Photography",
+      description: "General photography.",
+      medium: "guess",
+      date: "Ongoing",
+      link: "/art/photography",
+              image: `photos/24-12-23-a.JPG`,
+    }
   ];
   return (
     <div className={`bg-[url()] bg-center p-4`}>

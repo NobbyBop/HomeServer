@@ -19,12 +19,6 @@ function Navigation({displayName=false}) {
         >
           Art
         </SnavLink>
-        <SnavLink
-          to="/photography"
-          className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-        >
-          Photography
-        </SnavLink>
       </nav>
     </>
   );
