@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node src/scripts/photos.cjs",
+    "prebuild": "node src/scripts/photos.cjs",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

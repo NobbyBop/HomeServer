@@ -62,7 +62,7 @@ function Art() {
   ];
   return (
     <div className={`bg-[url()] bg-center p-4`}>
-    <div className="flex flex-col items-center justify-center min-h-screen font-serif">
+    <div className="flex flex-col items-center justify-center min-h-screen font-[Courier_New]">
       <Navigation displayName="true"/>
       <div className="flex flex-col gap-4 lg:max-w-1/3 sm:max-w-1/2">
         {projects.map((project) => (

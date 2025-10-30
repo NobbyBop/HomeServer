@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 import Navigation from "./Navigation";
 function Home() {
   return (
-    <div className={`bg-[url('/images/backgrounds/EUPHORIA_RUN.JPG')] bg-position-[center_top_20%]`}>
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-serif">
-      <Navigation displayName="true"/>
+    <div className={`bg-rose-400 bg-[url('/images/backgrounds/EUPHORIA_RUN.png')] bg-position-[center_top_20%]`}>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-[Courier_New]">
+      <div className="text-2xl"><Navigation displayName="true"/></div>
       <img
         className="w-full lg:max-w-1/3 md:max-w-1/2"
         src="/images/me_frame_shadow.png"

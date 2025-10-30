@@ -12,7 +12,7 @@ function GalleryPage({
 }) {
   return (
     <div className={`bg-[url('${backgroundImageUrl}')] bg-center p-4`}>
-    <div className="flex flex-col items-center justify-center min-h-screen font-serif">
+    <div className="flex flex-col items-center justify-center min-h-screen font-[Courier_New]">
       <Navigation displayName="true"/>
       {headerImages.map((img, index) => (
         <img key={index} className={img.className} src={img.src} />
@@ -21,7 +21,7 @@ function GalleryPage({
       <h2 className="font-bold text-3xl">{title}</h2>
       <p className="lg:max-w-1/2">{description}</p>
 
-      <div className="flex flex-col gap-4 md:max-w-1/2 lg:max-w-1/3">
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 md:max-w-1/2 lg:max-w-1/2">
         {showCaptions ? (
           items.map((project) => (
             <div className="border-2" key={project.id}>

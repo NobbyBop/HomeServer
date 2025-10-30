@@ -5,8 +5,8 @@ function Navigation({displayName=false}) {
   const inactiveClass = "hover:underline"
   return (
     <>
-      {displayName && <NavLink className="font-bold" to={"/"}>Nicholas Mirigliani</NavLink>}
-      <nav className="flex gap-4">
+      {displayName && <NavLink className="font-bold" to={"/"}>NICHOLAS MIRIGLIANI</NavLink>}
+      <nav className="flex gap-4 justify-center items-center">
         <SnavLink
           to="/home"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
