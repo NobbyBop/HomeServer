@@ -1,0 +1,11 @@
+{
+  "title": "PART SIX: THE PARTICIPANTS",
+  "description": "PLEASE FIND THE PARTICIPANTS' RESPONSES BELOW.",
+  "imageFolder": "/attention/",
+  "showCaptions": false,
+  "font":"roboto",
+  "headerImages": [
+    { "src": "/attention/title.png", "className": "max-w-1xs" }
+  ],
+  "items": ["participant1.JPEG", "participant2.JPEG", "participant3.JPEG", "participant4.JPEG", "participant5.JPEG"]
+}

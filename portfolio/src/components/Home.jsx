@@ -1,55 +1,31 @@
-import NavBar from "./NavBar";
+import Navigation from "./Navigation";
 function Home() {
-  const body = document.body;
-  body.className = "home-bg";
   return (
-    <div className="homeContainer">
-      <div>
-        <NavBar scrollText="WHO IS THIS GUY? WHAT DOES HE WANT FROM YOU? WHAT IS HE SMILING ABOUT? WHO IS THIS GUY? WHAT DOES HE WANT FROM YOU? WHAT IS HE SMILING ABOUT?" />
-      </div>
-      <div className="homeInnerContainer1">
-        <div className="homeTextDiv">
-          <h2>About</h2>
-          <p className="homeText">
-            I am a Computer Science student at Stevens Institute of Technology,
-            pursuing a minor in Visual Arts & Technology. My work consists
-            primarily of ballpoint pen drawings, but spans a wide array of
-            mediums. I have done work in web design, graphic design,
-            photography, videography, collage, poetry, and creative writing (and
-            even a little music composition.) <br />
-            This website is a platform for me to share all of my creative
-            endeavors, thanks for checking it out!
-            <br />
-            Inquiries can be sent to{" "}
-            <a href="mailto:nicholasmirigliani@gmail.com">
-              nicholasmirigliani@gmail.com
-            </a>
-            .
-          </p>
-        </div>
-        <img
-          className="homeImage"
-          src="/images/me.JPEG"
-        />
-      </div>
-      <div className="homeInnerContainer2">
-        <h2>Links</h2>
-        <a target="_blank" href="https://www.youtube.com/@nobbybop">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-[Courier_New]">
+      <div><Navigation displayName="true" underline="false"/></div>
+      <img
+        className="w-full lg:max-w-1/3 md:max-w-1/2"
+        src="/images/me_frame_shadow.png"
+      />
+      <p className="max-w-1/2">
+        Insert a long piece of text here.
+      </p>
+
+      <div className="flex gap-2">
+        <a className="hover:underline" target="_blank" href="https://www.youtube.com/@nobbybop">
           YouTube
         </a>
-        <a target="_blank" href="https://www.instagram.com/nick.mirig/">
+        <a className="hover:underline" target="_blank" href="https://www.instagram.com/nick.mirig/">
           Instagram
         </a>
-        <a
-          target="_blank"
-          href="https://www.linkedin.com/in/nicholas-mirigliani/"
+        <a className="hover:underline" target="_blank" href="https://www.linkedin.com/in/nicholas-mirigliani/"
         >
           LinkedIn
         </a>
-        <a target="_blank" href="https://github.com/NobbyBop">
+        <a  className="hover:underline" target="_blank" href="https://github.com/NobbyBop">
           GitHub
         </a>
-        <a target="_blank" href="/Resume.pdf">
+        <a className="hover:underline" target="_blank" href="/Resume.pdf">
           Résumé
         </a>
       </div>
