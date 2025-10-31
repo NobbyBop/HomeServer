@@ -1,5 +1,4 @@
 import Navigation from "./Navigation";
-import { NavLink } from "react-router-dom";
 
 function GalleryPage({
   title,
@@ -9,31 +8,39 @@ function GalleryPage({
   backgroundImageUrl,
   headerImages = [],
   showCaptions = true,
+  font = "Courier_New"
 }) {
   return (
     <div className={`bg-[url('${backgroundImageUrl}')] bg-center p-4`}>
-    <div className="flex flex-col items-center justify-center min-h-screen font-[Courier_New]">
-      <Navigation displayName="true"/>
+    <div className={`flex flex-col items-center justify-center min-h-screen font-[${font}]`}>
+    <div className=" lg:max-w-3/5 flex flex-col items-center">
+      <div><Navigation displayName="true"/></div>
+
+      <div className="p-4"></div>
+
       {headerImages.map((img, index) => (
         <img key={index} className={img.className} src={img.src} />
       ))}
 
       <h2 className="font-bold text-3xl">{title}</h2>
-      <p className="lg:max-w-1/2">{description}</p>
+      <p className="">{description}</p>
 
-      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 md:max-w-1/2 lg:max-w-1/2">
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
         {showCaptions ? (
           items.map((project) => (
             <div className="border-2" key={project.id}>
-              <img src={project.image} />
-              <h2 className="font-bold text-2xl">{"\""+project.title+"\""}</h2>
-              <p className="text-gray-500">{project.comment}</p>
+              <img className="border-b-2" src={project.image} />
+              <div className="p-4">
+                <h2 className="font-bold text-2xl">{"\""+project.title+"\""}</h2>
+                <p className="text-gray-600">{project.comment}</p>
+              </div>
             </div>
           ))
         ) : (
-          items.map((name, index) => <img key={index} src={`${imageFolder}${name}`} />)
+          items.map((name, index) => <img className="border-2"key={index} src={`${imageFolder}${name}`} />)
         )}
       </div>
+    </div>
     </div>
     </div>
   );

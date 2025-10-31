@@ -1,10 +1,12 @@
 import Navigation from "./Navigation";
 function Landing() {
   return (
-    <div className={`bg-orange-300 bg-[url('/images/backgrounds/PLANT.png')]`}>
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-[Courier_New] text-2xl">
-      <Navigation displayName="true"/>
-    </div>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-[Courier_New]">
+      <div className="flex flex-col items-center justify-center gap-0">
+        <h1 className="font-bold text-2xl">NICHOLAS MIRIGLIANI</h1>
+        <h2 className="text-gray-500">dot com</h2>
+      </div>
+      <Navigation underline="false"/>
     </div>
   );
 }

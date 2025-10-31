@@ -62,22 +62,33 @@ function Art() {
   ];
   return (
     <div className={`bg-[url()] bg-center p-4`}>
-    <div className="flex flex-col items-center justify-center min-h-screen font-[Courier_New]">
-      <Navigation displayName="true"/>
-      <div className="flex flex-col gap-4 lg:max-w-1/3 sm:max-w-1/2">
+    <div className="flex flex-col items-center min-h-screen font-[Courier_New]">
+      <div><Navigation displayName="true" underline="false"/></div>
+
+      <div className="grid lg:grid-cols-2 lg:max-w-3/4 gap-4">
         {projects.map((project) => (
-          <div className="flex flex-col border-2 items-center bg-white" key={project.id}>
-            <h2>
-              <SnavLink to={project.link} className="font-bold">{project.title}</SnavLink>
-            </h2>
-            <p className="">{project.description}</p>
-            <p className="">
-              <b>Medium</b>: {project.medium}
-            </p>
-            <p className="">
-              <b>Date</b>: {project.date}
-            </p>
-            <img className="w-full max-w-3xs" src={project.image} />
+          <div className="flex flex-col border-2 bg-white p-4" key={project.id}>
+            <div className="text-center text-2xl">
+              <h2>
+                <SnavLink to={project.link} className="font-bold">{project.title}</SnavLink>
+                <br></br>
+              </h2>
+            </div>
+
+            <div className="lg:grid grid-cols-2">
+              <div className="justify-left">
+                <p className="text-gray-600">{project.description}</p>
+                <p className="">
+                  <b>Medium</b>: {project.medium}
+                </p>
+                <p className="">
+                  <b>Date</b>: {project.date}
+                </p>
+              </div>
+              <div>
+                <img className="w-full max-w-3xs border-2" src={project.image} />
+              </div>
+            </div>
           </div>
         ))}
       </div>
