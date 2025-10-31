@@ -8,7 +8,7 @@ function GalleryPage({
   backgroundImageUrl,
   headerImages = [],
   showCaptions = true,
-  font = "Courier_New"
+  font = "monospace"
 }) {
   return (
     <div className={`bg-[url('${backgroundImageUrl}')] bg-center p-4`}>

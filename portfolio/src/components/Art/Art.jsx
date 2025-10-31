@@ -61,15 +61,16 @@ function Art() {
     }
   ];
   return (
-    <div className={`bg-[url()] bg-center p-4`}>
-    <div className="flex flex-col items-center min-h-screen font-[Courier_New]">
+    <div className={`bg-[url('images/HomeBG2.png')] bg-cover bg-center p-4`}>
+    <div className="flex flex-col items-center min-h-screen font-[monospace]">
       <div><Navigation displayName="true" underline="false"/></div>
 
       <div className="grid lg:grid-cols-2 lg:max-w-3/4 gap-4">
         {projects.map((project) => (
-          <div className="flex flex-col border-2 bg-white p-4" key={project.id}>
+          <div className="flex flex-col border-2 bg-white/50 p-4" key={project.id}>
+
             <div className="text-center text-2xl">
-              <h2>
+              <h2 className="hover:underline">
                 <SnavLink to={project.link} className="font-bold">{project.title}</SnavLink>
                 <br></br>
               </h2>
@@ -85,10 +86,15 @@ function Art() {
                   <b>Date</b>: {project.date}
                 </p>
               </div>
+
               <div>
-                <img className="w-full max-w-3xs border-2" src={project.image} />
+                <SnavLink to={project.link}>
+                  <img className="w-full max-w-3xs border-2" src={project.image} />
+                </SnavLink>
               </div>
+
             </div>
+            
           </div>
         ))}
       </div>
