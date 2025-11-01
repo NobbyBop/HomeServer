@@ -7,7 +7,7 @@ function Navigation({displayName=false, underline=true}) {
     <>
       {displayName && <NavLink className="font-bold text-2xl" to={"/"}>NICHOLAS MIRIGLIANI</NavLink>}
       {/* ${underline=="true" ? "border-b-2  pb-4" : ""} */}
-      <nav className={`flex gap-4 justify-center items-center ${underline!="false" ? "border-b-2" : ""} `}>
+      <nav className={`flex gap-4 justify-center items-center text-xl ${underline!="false" ? "border-b-2" : ""} `}>
         <SnavLink
           to="/home"
           className={({ isActive }) => (isActive ? activeClass : inactiveClass)}

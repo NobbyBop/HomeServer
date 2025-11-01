@@ -23,9 +23,13 @@ const mobiusConfig = {
       our fictitious band MOBIUS LINE, as well as constructing a narrative which
       is scattered across multiple social media platforms and accounts.
       Originally, posters (seen below) were hung around the neighborbood,
-      linking to the start of the game.On this page I have included some of the
+      linking to the start of the game. On this page I have included some of the
       graphic design work I did for the project, as well as some of our band
-      photos, taken by Andrew Yurovchak. I hope you'll take a little time to
+      photos, taken by <a
+        className="text-blue-700"
+        target="_blank"
+        href="https://photos.baetylboy.biz"
+      >Andrew Yurovchak</a>. I hope you'll take a little time to
       explore the game{" "}
       <a
         className="text-blue-700"
@@ -42,10 +46,11 @@ const mobiusConfig = {
   imageFolder: "/mobius/",
   showCaptions: true,
   headerImages: [
-    { src: "/mobius/Logo2.jpg", className: "" },
+    { src: "/mobius/Logo2.png", className: "" },
     { src: "/mobius/croppedbeatles.png", className: "" },
   ],
   items: mobiusItems,
+  backgroundImageUrl: "/images/MobiusBG.png"
 };
 
 const photographyConfig = {
@@ -53,7 +58,9 @@ const photographyConfig = {
   description: "Taken on a Canon PowerShot ELPH 190 IS. (Most recent to oldest.)",
   imageFolder: "/photos/",
   showCaptions: false,
-  items: photoList
+  items: photoList,
+  backgroundColor:"bg-gray-900",
+  fontColor:"text-gray-100"
 };
 
 function App() {
