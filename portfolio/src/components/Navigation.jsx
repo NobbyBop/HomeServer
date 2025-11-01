@@ -5,7 +5,7 @@ function Navigation({displayName=false, underline=true}) {
   const inactiveClass = "hover:underline"
   return (
     <>
-      {displayName && <NavLink className="font-bold text-2xl" to={"/"}>NICHOLAS MIRIGLIANI</NavLink>}
+      {displayName && <div className="flex justify-center"><NavLink className="font-bold text-2xl" to={"/"}>NICHOLAS MIRIGLIANI</NavLink></div>}
       {/* ${underline=="true" ? "border-b-2  pb-4" : ""} */}
       <nav className={`flex gap-4 justify-center items-center text-xl ${underline!="false" ? "border-b-2" : ""} `}>
         <SnavLink

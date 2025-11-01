@@ -12,6 +12,7 @@ import mobiusItems from "../json/mobius.json"
 import attentionPacketConfig from "../json/attention_packet.json"
 import attentionParticipantsConfig from "../json/attention_participants.json"
 import attentionPresentationConfig from "../json/attention_presentation.json"
+import orangeList from "../json/orangeList.json"
 
 const mobiusConfig = {
   title: "",
@@ -50,6 +51,7 @@ const mobiusConfig = {
     { src: "/mobius/croppedbeatles.png", className: "" },
   ],
   items: mobiusItems,
+  backgroundClass: "bg-center bg-repeat-y",
   backgroundImageUrl: "/images/MobiusBG.png"
 };
 
@@ -58,10 +60,19 @@ const photographyConfig = {
   description: "Taken on a Canon PowerShot ELPH 190 IS. (Most recent to oldest.)",
   imageFolder: "/photos/",
   showCaptions: false,
-  items: photoList,
-  backgroundColor:"bg-gray-900",
-  fontColor:"text-gray-100"
+  items: photoList.reverse(),
+  backgroundClass:"bg-gray-900 text-gray-100",
 };
+
+const orangeConfig = {
+  title: "\"Orange Season\"",
+  description: "\"Orange Season\" is a photo collection of oranges in public spaces. I rode my bike through parks, along the river, and through my neighborhood, and photographed a few oranges that I carried with me. In recent years, I have had something of an obsession with the form and color of oranges. I had \"Orange Season\" stuck in my head, and I knew I had to do something with it. This photo collection was my ultimate expression of that feeling.",
+  imageFolder:"/photos/OrangeSeason/",
+  showCaptions: false,
+  items: orangeList,
+  backgroundClass: "bg-fixed bg-center",
+  backgroundImageUrl:"/images/LandingBG_Mobile.png"
+}
 
 function App() {
   return (
@@ -79,6 +90,7 @@ function App() {
         <Route path="/art/attention/presentation" element={<GalleryPage {...attentionPresentationConfig} />} />
         <Route path="/art/attention/participants" element={<GalleryPage {...attentionParticipantsConfig} />} />
         <Route path="/art/mobiusline" element={<GalleryPage {...mobiusConfig} />} />
+        <Route path="art/orangeseason" element={<GalleryPage {...orangeConfig}/>}/>
        
       </Routes>
     </div>

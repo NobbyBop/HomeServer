@@ -6,15 +6,14 @@ function GalleryPage({
   items,
   imageFolder,
   backgroundImageUrl,
-  backgroundColor,
-  fontColor,
+  backgroundClass,
   headerImages = [],
   showCaptions = true,
   font = "monospace"
 }) {
   return (
     <div
-      className={`p-4 bg-center bg-repeat-y ${backgroundColor || ""} ${fontColor || ""}`}
+      className={`p-4  ${backgroundClass || ""}`}
       style={backgroundImageUrl ? { backgroundImage: `url(${backgroundImageUrl})` } : {}}
     >
     <div className={`flex flex-col items-center justify-center min-h-screen font-[${font}]`}>

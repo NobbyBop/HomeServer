@@ -23,5 +23,6 @@
     "SUSAN.JPG",
     "UGH.JPG"
   ],
+  "backgroundClass":"bg-center bg-repeat-y",
   "backgroundImageUrl":"/images/SketchbookBG.png"
 }

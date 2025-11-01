@@ -1,7 +1,10 @@
 import Navigation from "./Navigation";
 function Landing() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-[monospace] bg-cover" style={{ backgroundImage: "url('images/LandingBG_Mobile.png')", backgroundPosition: 'center' }}>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 font-[monospace] bg-cover" 
+    style={
+      { backgroundImage: "url('images/LandingBG_Desktop.png')", backgroundPosition: 'center 10%' }
+      }>
       <div className="flex flex-col items-center justify-center gap-0">
         <h1 className="font-bold text-2xl">NICHOLAS MIRIGLIANI</h1>
         <h2 className="text-gray-500">dot com</h2>
