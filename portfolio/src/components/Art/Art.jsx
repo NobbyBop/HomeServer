@@ -61,7 +61,7 @@ function Art() {
     }
   ];
   return (
-    <div className={`bg-[url('images/LandingBG_Desktop.png')] bg-cover bg-center p-4`}>
+    <div className={`bg-cover bg-center p-4`} style={{ backgroundImage: "url('images/LandingBG_Desktop.png')" }}>
     <div className="flex flex-col items-center min-h-screen font-[monospace]">
       <div><Navigation displayName="true" underline="false"/></div>
 
