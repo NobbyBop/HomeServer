@@ -9,7 +9,7 @@ fs.readdir(photopath, (err, files) => {
   } else {
     files.forEach(file => {
       const ext = path.extname(file).toLowerCase();
-      if(['.jpg', '.jpeg', '.png'].includes(ext)){
+      if(['.jpg', '.jpeg', '.png'].includes(ext) && !file.includes("thumbnail")){
         photoList.push(file)
       }
     })

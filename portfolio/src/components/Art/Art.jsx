@@ -57,23 +57,21 @@ function Art() {
       medium: "guess",
       date: "Ongoing",
       link: "/art/photography",
-              image: `photos/24-12-23-a.JPG`,
+              image: `/photos/thumbnail.JPG`,
     }
   ];
   return (
-    <div className={`bg-[url('images/HomeBG2.png')] bg-cover bg-center p-4`}>
+    <div className={`bg-[url('images/LandingBG_Desktop.png')] bg-cover bg-center p-4`}>
     <div className="flex flex-col items-center min-h-screen font-[monospace]">
       <div><Navigation displayName="true" underline="false"/></div>
 
       <div className="grid lg:grid-cols-2 lg:max-w-3/4 gap-4">
         {projects.map((project) => (
-          <div className="flex flex-col border-2 bg-white/50 p-4" key={project.id}>
+          <SnavLink to={project.link}>
+          <div className="flex flex-col border-2 border-gray-200 hover:border-black bg-white/50 p-4" key={project.id}>
 
             <div className="text-center text-2xl">
-              <h2 className="hover:underline">
-                <SnavLink to={project.link} className="font-bold">{project.title}</SnavLink>
-                <br></br>
-              </h2>
+              <h2 className="font-bold">{project.title} </h2>
             </div>
 
             <div className="lg:grid grid-cols-2">
@@ -88,14 +86,13 @@ function Art() {
               </div>
 
               <div>
-                <SnavLink to={project.link}>
                   <img className="w-full max-w-3xs border-2" src={project.image} />
-                </SnavLink>
               </div>
 
             </div>
             
           </div>
+          </SnavLink>
         ))}
       </div>
     </div>

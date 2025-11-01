@@ -6,12 +6,17 @@ function GalleryPage({
   items,
   imageFolder,
   backgroundImageUrl,
+  backgroundColor,
+  fontColor,
   headerImages = [],
   showCaptions = true,
   font = "monospace"
 }) {
   return (
-    <div className={`bg-[url('${backgroundImageUrl}')] bg-center p-4`}>
+    <div
+      className={`p-4 bg-center bg-repeat-y ${backgroundColor || ""} ${fontColor || ""}`}
+      style={backgroundImageUrl ? { backgroundImage: `url(${backgroundImageUrl})` } : {}}
+    >
     <div className={`flex flex-col items-center justify-center min-h-screen font-[${font}]`}>
     <div className=" lg:max-w-3/5 flex flex-col items-center">
       <div><Navigation displayName="true"/></div>
@@ -23,7 +28,7 @@ function GalleryPage({
       ))}
 
       <h2 className="font-bold text-3xl">{title}</h2>
-      <p className="">{description}</p>
+      <p className="lg:text-2xl">{description}</p>
 
       <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
         {showCaptions ? (

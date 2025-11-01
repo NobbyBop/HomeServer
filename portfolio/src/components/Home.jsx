@@ -1,7 +1,7 @@
 import Navigation from "./Navigation";
 function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4 font-[monospace] bg-[url('images/HomeBG2.png')] bg-cover bg-center">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4 font-[monospace] bg-[url('images/HomeBG2.png')] bg-cover bg-[right_center_10%]">
       <div><Navigation displayName="true" underline="false"/></div>
       <img
         className="w-full lg:max-w-1/4 md:max-w-1/2"
