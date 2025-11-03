@@ -1,32 +1,52 @@
 import Navigation from "./Navigation";
 function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4 font-[monospace] bg-cover" style={{ backgroundImage: "url('images/HomeBG2.png')", backgroundPosition: 'right center 10%' }}>
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4 font-[monospace] bg-cover" 
+    style={{ backgroundImage: "url('images/HomeBG3.png')", backgroundPosition: 'top' }}>
       <div><Navigation displayName="true" underline="false"/></div>
-      <img
-        className="w-full lg:max-w-1/4 md:max-w-1/2"
-        src="/images/me_frame_2.png"
-      />
-      <p className="lg:max-w-1/2">
-        Ut veniam consectetur commodo dolor sed ut. Ad eiusmod ea ex adipiscing tempor labore incididunt. Eiusmod ut dolore labore sed sed ad et ut amet veniam consequat. Dolore magna incididunt ut quis laboris exercitation ipsum ex enim adipiscing amet ut dolore et. Sit ut ipsum labore ex ut consectetur dolor ut. Labore labore ex amet ex consectetur.
 
-Ad adipiscing ullamco aliquip quis quis ut ullamco nostrud ut dolor et consequat sed nisi. Aliquip magna consequat ad ipsum adipiscing. Lorem nisi do adipiscing sit elit ad incididunt. Ipsum sit sit et aliqua minim sit eiusmod amet enim aliquip dolore.
+      <div className="grid lg:grid-cols-2 border-2 border-gray-200 bg-white/50 p-4 lg:max-w-1/2 gap-4">
+        <img
+          className="w-full border-2"
+          src="/images/me.JPEG"
+        />
+        <p> Hi and welcome! I'm Nick, a software developer and artist (among other things) from {" "}
+          <a href="https://en.wikipedia.org/wiki/Wilkes-Barre,_Pennsylvania"
+          target="_blank"
+          className="text-blue-600 hover:underline">
+            Wilkes-Barre, Pennsylvania
+            </a>{". "} 
+          My technical background includes web development, building AI agents, and systems programming. 
+          I'm a problem solver and love working with new technologies. I'm currently pursuing my B.S. in Computer Science from Stevens Institute of Technology. For more information, please see my {" "}
+          <a 
+          href="/Resume.pdf"
+          target="_blank"
+          className="text-blue-600 hover:underline">
+          résumé
+          </a>
+          {". "} Otherwise, please feel free to send me an email at {" "}
+          <a href="mailto:nicholasmirigliani@gmail.com"
+          target="_blank"
+          className="text-blue-600 hover:underline">
+            nicholasmirigliani@gmail.com
+            </a>{". "} 
+          <br/>
+          In my creative work, I mainly use pen, collage, and photography. I dabble in digital art, and as you'll see
+          I tend to work across mediums in my projects. I'm also pursing a minor in Visual Arts & Technology.
+          <br/>
+          When I'm not developing or making art, I enjoy running - I completed my first marathon in Jersey City this spring, playing 
+          guitar, and watching sitcoms.
+          </p>
+      </div>
 
-Minim adipiscing laboris exercitation tempor aliqua do consectetur ut ut nisi. Do commodo lorem quis minim consequat commodo. Ut exercitation veniam labore adipiscing labore nostrud elit ea ut. Commodo exercitation ullamco ullamco ad sed consequat ut lorem dolore ipsum ut sit enim nisi. Dolore eiusmod nostrud et aliqua minim lorem consequat ut ex sit ad. Ut dolore nostrud ipsum sed aliqua dolore ut nostrud dolore do consequat tempor laboris.
-      </p>
-
-      <div className="flex gap-2">
-        <a className="hover:underline" target="_blank" href="https://www.youtube.com/@nobbybop">
-          YouTube
-        </a>
+      <div className="flex gap-4">
         <a className="hover:underline" target="_blank" href="https://www.instagram.com/nick.mirig/">
           Instagram
         </a>
-        <a className="hover:underline" target="_blank" href="https://www.linkedin.com/in/nicholas-mirigliani/"
-        >
+        <a className="hover:underline" target="_blank" href="https://www.linkedin.com/in/nicholas-mirigliani/">
           LinkedIn
         </a>
-        <a  className="hover:underline" target="_blank" href="https://github.com/NobbyBop">
+        <a className="hover:underline" target="_blank" href="https://github.com/NobbyBop">
           GitHub
         </a>
         <a className="hover:underline" target="_blank" href="/Resume.pdf">
