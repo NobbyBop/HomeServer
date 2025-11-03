@@ -103,7 +103,7 @@ function Professional(){
                                 </a>} | {experience.date}</p>
                             <p>{experience.description}</p>
                         </div>
-                        <img className="border-2 max-w-1/4 aspect-square" src={experience.image}/>
+                        <img className="border-2 max-w-[10vw] max-h-[10vw]" src={experience.image}/>
                     </div>)
                 })}
             </div>
