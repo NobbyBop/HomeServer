@@ -85,13 +85,13 @@ export const mobiusConfig = {
       linking to the start of the game. On this page I have included some of the
       graphic design work I did for the project, as well as some of our band
       photos, taken by <a
-        className="text-blue-700"
+        className="text-blue-600"
         target="_blank"
         href="https://photos.baetylboy.biz"
       >Andrew Yurovchak</a>. I hope you'll take a little time to
       explore the game{" "}
       <a
-        className="text-blue-700"
+        className="text-blue-600"
         target="_blank"
         href="https://m.youtube.com/watch?v=VJmVcI-avlE"
       >

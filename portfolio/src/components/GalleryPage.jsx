@@ -42,7 +42,7 @@ function GalleryPage({
     <div className=" lg:max-w-5/8 flex flex-col items-center">
       <div><Navigation displayName="true"/></div>
 
-      <div className="p-4"></div>
+      <div className="p-2"></div>
 
       {headerImages.map((img, index) => (
         <img key={index} className={img.className} src={img.src} />

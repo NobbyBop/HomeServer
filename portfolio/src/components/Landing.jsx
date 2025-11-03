@@ -7,7 +7,7 @@ function Landing() {
       }>
       <div className="flex flex-col items-center justify-center gap-0">
         <h1 className="font-bold text-2xl">NICHOLAS MIRIGLIANI</h1>
-        <h2 className="text-gray-500">dot com</h2>
+        <h2 className="text-gray-600">dot com</h2>
       </div>
       <Navigation underline="false"/>
     </div>
