@@ -105,8 +105,8 @@ export const mobiusConfig = {
   imageFolder: "/mobius/",
   showCaptions: false,
   headerImages: [
-    { src: "/mobius/headers/Logo2.webp", className: "" },
-    { src: "/mobius/headers/croppedbeatles.webp", className: "" },
+    { src: "/mobius/headings/Logo2.webp", className: "" },
+    { src: "/mobius/headings/croppedbeatles.webp", className: "" },
   ],
   items: mobius,
   backgroundClass: "bg-center bg-repeat-y",
