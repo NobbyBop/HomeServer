@@ -4,8 +4,8 @@ function Art() {
   let projects = [
     {
       id: 0,
-      title: "\"Orange Season\"",
-      description: "An homage to my favorite fruit. An exploration the form of an orange in public spaces. Here comes the \"Orange Season\" .",
+      title: "\"ORANGE SEASON\"",
+      description: "An homage to my favorite fruit. An exploration the form of an orange in public spaces. Here comes the \"ORANGE SEASON\" .",
       medium: "Photography",
       date: "2025",
       link: "/art/orangeseason",

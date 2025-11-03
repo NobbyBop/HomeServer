@@ -1,6 +1,7 @@
 import SnavLink from "./SnavLink";
 import { NavLink } from "react-router-dom";
 function Navigation({displayName=false, underline=true}) {
+  
   const activeClass = "text-blue-600 underline"
   const inactiveClass = "hover:underline"
   return (
@@ -14,6 +15,14 @@ function Navigation({displayName=false, underline=true}) {
         >
           Home
         </SnavLink>
+
+        <SnavLink
+          to="/professional"
+          className={({ isActive }) => (isActive ? activeClass: inactiveClass)}
+        >
+          Professional
+        </SnavLink>
+
         <SnavLink
           to="/art"
           className={({ isActive }) => (isActive ? activeClass: inactiveClass)}

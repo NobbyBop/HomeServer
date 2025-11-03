@@ -2,7 +2,7 @@ import SnavLink from "../SnavLink";
 import Navigation from "../Navigation";
 function Art_Attention() {
   return (
-    <div className="flex flex-col items-center justify-center font-roboto">
+    <div className="flex flex-col items-center justify-center font-[Courier_New]">
     <div><Navigation displayName="true"/></div>
     <div className="flex flex-col gap-4 lg:max-w-1/2 p-4">
       <img src="/attention/title.png"/>
@@ -191,7 +191,6 @@ function Art_Attention() {
           <p >AT THIS TIME YOU ARE DISMISSED.</p>
         </div>
       </div>
-      <SnavLink to="/art/">BACK TO ART</SnavLink>
     </div>
     </div>
   );
