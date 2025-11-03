@@ -152,43 +152,43 @@ export const comfortConfig = {
         {
             id: 1,
             title: "3",
-            image: "/comfort/1.JPG",
+            image: "/comfort/1.webp",
             comment: "The comfort of my college bedroom which I have since left."
         },
         {
             id: 2,
             title: ".5",
-            image: "/comfort/2.JPG",
+            image: "/comfort/2.webp",
             comment: "Looking in the mirror for too long and feeling like an alien, uncomfortable in my own skin."
         },
         {
             id: 3,
             title: "Overwhelm",
-            image: "/comfort/3.JPG",
+            image: "/comfort/3.webp",
             comment: "Realizing all the things you don't know about the world. How can you find comfort when you'll never know everything?"
         },
         {
             id: 4,
             title: "'Hold on' and a journal entry",
-            image: "/comfort/4.JPG",
+            image: "/comfort/4.webp",
             comment: "Comfort in romantic partners who aren't in your life forever."
         },
         {
             id: 5,
             title: "Chaos/Comfort",
-            image: "/comfort/5.JPG",
+            image: "/comfort/5.webp",
             comment: "Struggling to find comfort amid anxiety."
         },
         {
             id: 6,
             title: "Coping/Winning",
-            image: "/comfort/6.JPG",
+            image: "/comfort/6.webp",
             comment: "The comfort of coping mechanisms, positive or not."
         },
         {
             id: 7,
             title: "Concept",
-            image: "/comfort/concept.JPG",
+            image: "/comfort/concept.webp",
             comment: "My initial planning."
         }
     ],

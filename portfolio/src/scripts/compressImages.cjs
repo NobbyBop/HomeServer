@@ -17,6 +17,9 @@ const inputOutput = [
   {
     input: path.join(__dirname, '../../public/mobius'), 
   },
+  {
+    input: path.join(__dirname, '../../public/mobius/headers'), 
+  },
   //Sketchbook
   {
     input: path.join(__dirname, '../../public/sketchbook'), 
