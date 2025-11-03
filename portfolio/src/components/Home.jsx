@@ -2,13 +2,13 @@ import Navigation from "./Navigation";
 function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4 font-[monospace] bg-cover" 
-    style={{ backgroundImage: "url('images/HomeBG3.png')", backgroundPosition: 'top' }}>
+    style={{ backgroundImage: "url('images/HomeBG3.webp')", backgroundPosition: 'top' }}>
       <div><Navigation displayName="true" underline="false"/></div>
 
       <div className="grid lg:grid-cols-2 border-2 border-gray-200 bg-white/50 p-4 lg:max-w-1/2 gap-4">
         <img
           className="w-full border-2"
-          src="/images/me.JPEG"
+          src="/images/me.webp"
         />
         <p> Hi and welcome! I'm Nick, a software developer and artist (among other things) from {" "}
           <a href="https://en.wikipedia.org/wiki/Wilkes-Barre,_Pennsylvania"

@@ -22,7 +22,7 @@ function Professional(){
                         here
                 </a>{"."}</p>),
             date: "May 2025 - Present",
-            image: "/images/Agentuity.png"
+            image: "/images/Agentuity.webp"
         },
         {
             title: "Computer Architecture and Systems Programming Course Assistant",
@@ -42,7 +42,7 @@ function Professional(){
                         here
                 </a>{".)"}</p>),
             date: "August 2024 - Present",
-            image: "/images/Stevens.png"
+            image: "/images/Stevens.webp"
         },
         {
             title: "Development Intern",
@@ -59,7 +59,7 @@ function Professional(){
                 OSHA training, as well as providing a helpful interface for administrators. 
             </p>),
             date: "August 2024 - Present",
-            image: "/images/Mericle.png"
+            image: "/images/Mericle.webp"
         },
         {
             title: "Research Assistant",
@@ -78,12 +78,12 @@ function Professional(){
                 using data mining and visualization techniques in Python. It was a great first professional experience,
                 and allowed me the opportunity to grow technically and professionally in a working environment. </p>),
             date: "August 2024 - Present",
-            image: "/images/LIINES.png"
+            image: "/images/LIINES.webp"
         }
     ]
     return(
         <div className={`bg-cover bg-center p-4`} 
-            style={{ backgroundImage: "url('images/ProfessionalBG2.png')", backgroundPosition: "left" }}>
+            style={{ backgroundImage: "url('images/ProfessionalBG2.webp')", backgroundPosition: "left" }}>
         <div className="flex flex-col items-center min-h-screen font-[monospace]">
             <div><Navigation displayName="true" underline="false"/></div>
             <div className="flex flex-col items-center justify-center lg:max-w-1/2 gap-4">

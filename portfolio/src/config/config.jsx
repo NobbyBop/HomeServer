@@ -25,7 +25,7 @@ export const attentionPacketConfig = {
   // font:"roboto",
   headerImages: [
     {
-      src: "/attention/title.png",
+      src: "/attention/title.webp",
       className: "lg:max-w-1/2"
     }
   ],
@@ -45,7 +45,7 @@ export const attentionParticipantsConfig = {
   showCaptions: false,
   // font:"roboto",
   headerImages: [
-    { src: "/attention/title.png", 
+    { src: "/attention/title.webp", 
         className: "lg:max-w-1/2" 
     }
   ],
@@ -66,7 +66,7 @@ export const attentionPresentationConfig = {
   // font:"roboto",
   headerImages: [
     {
-        src: "/attention/title.png", 
+        src: "/attention/title.webp", 
         className: "lg:max-w-1/2" 
     }
   ],
@@ -105,12 +105,12 @@ export const mobiusConfig = {
   imageFolder: "/mobius/",
   showCaptions: false,
   headerImages: [
-    { src: "/mobius/headers/Logo2.png", className: "" },
-    { src: "/mobius/headers/croppedbeatles.png", className: "" },
+    { src: "/mobius/headers/Logo2.webp", className: "" },
+    { src: "/mobius/headers/croppedbeatles.webp", className: "" },
   ],
   items: mobius,
   backgroundClass: "bg-center bg-repeat-y",
-  backgroundImageUrl: "/images/MobiusBG.png"
+  backgroundImageUrl: "/images/MobiusBG.webp"
 };
 
 export const orangeConfig = {
@@ -120,7 +120,7 @@ export const orangeConfig = {
   showCaptions: false,
   items: orange,
   backgroundClass: "bg-fixed bg-center",
-  backgroundImageUrl:"/images/LandingBG_Mobile.png"
+  backgroundImageUrl:"/images/LandingBG_Mobile.webp"
 }
 
 export const photographyConfig = {
@@ -129,7 +129,7 @@ export const photographyConfig = {
   imageFolder: "/photos/",
   showCaptions: false,
   items: photos.reverse(),
-  backgroundImageUrl:"/images/PhotosBG2.png",
+  backgroundImageUrl:"/images/PhotosBG2.webp",
   backgroundClass:"bg-fixed bg-center",
 };
 
@@ -140,7 +140,7 @@ export const sketchbookConfig = {
   showCaptions: false,
   items: sketchbook,
   backgroundClass:"bg-center bg-repeat-y",
-  backgroundImageUrl:"/images/SketchbookBG.png"
+  backgroundImageUrl:"/images/SketchbookBG.webp"
 }
 
 export const comfortConfig = {
@@ -192,7 +192,7 @@ export const comfortConfig = {
             comment: "My initial planning."
         }
     ],
-    backgroundImageUrl:"/images/ComfortBG.png",
+    backgroundImageUrl:"/images/ComfortBG.webp",
     backgroundClass:"bg-repeat-y"
 }
 
@@ -202,6 +202,6 @@ export const worldlyConfig = {
     imageFolder: "/worldly/",
     showCaptions: false,
     items: worldly,
-    backgroundImageUrl: "/images/WorldlyBG.png",
+    backgroundImageUrl: "/images/WorldlyBG.webp",
     backgroundClass: "bg-fixed bg-center"
 }

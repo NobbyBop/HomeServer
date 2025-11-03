@@ -5,7 +5,7 @@ function Art_Attention() {
     <div className="flex flex-col items-center justify-center font-[Courier_New]">
     <div><Navigation displayName="true"/></div>
     <div className="flex flex-col gap-4 lg:max-w-1/2 p-4">
-      <img src="/attention/title.png"/>
+      <img src="/attention/title.webp"/>
       <p>
         THIS PROJECT IS A MULTI-LAYERED, MULTI-MEDIA EXPERIENCE THAT WAS
         INTENDED TO BE CONDUCTED IN-PERSON IN AN INTERACTIVE STYLE. IN LIEU OF
@@ -15,7 +15,7 @@ function Art_Attention() {
         THE DISPLAY. FOR A COMPLETE UNDERSTANDING, PLEASE CONSULT THE
         SUPPLEMENTAL DIAGRAM BELOW.
       </p>
-      <img src="/attention/webdiagram1.png"/>
+      <img src="/attention/webdiagram1.webp"/>
 
       <div className="lg:grid lg:grid-cols-2 border-2 p-4 gap-4">
         <div>
@@ -35,7 +35,7 @@ function Art_Attention() {
           </p>
         </div>
 
-        <img src={`/attention/envelope.JPEG`}/>
+        <img src={`/attention/envelope.webp`}/>
       </div>
 
 
@@ -50,7 +50,7 @@ function Art_Attention() {
         </div>
 
         <SnavLink to="/art/attention/packet">
-          <img src={`/attention/packet.JPEG`}/>
+          <img src={`/attention/packet.webp`}/>
         </SnavLink>
       </div>
       <div className="lg:grid lg:grid-cols-2 border-2 p-4 gap-4">
@@ -68,7 +68,7 @@ function Art_Attention() {
         <SnavLink to="/art/attention/presentation">
           <img
 
-            src={`/attention/usb.JPEG`}
+            src={`/attention/usb.webp`}
           />
         </SnavLink>
       </div>
@@ -84,7 +84,7 @@ function Art_Attention() {
 
         <img
 
-          src={`/attention/photos.JPEG`}
+          src={`/attention/photos.webp`}
         />
       </div>
       <div className="lg:grid lg:grid-cols-2 border-2 p-4 gap-4">
@@ -106,7 +106,7 @@ function Art_Attention() {
 
         <img
 
-          src={`/attention/cassette.JPEG`}
+          src={`/attention/cassette.webp`}
         />
       </div>
       <div className="lg:grid lg:grid-cols-2 border-2 p-4 gap-4">
@@ -123,7 +123,7 @@ function Art_Attention() {
         <SnavLink to="/art/attention/participants">
           <img
 
-            src={`/attention/participants.JPEG`}
+            src={`/attention/participants.webp`}
           />
         </SnavLink>
       </div>
@@ -156,7 +156,7 @@ function Art_Attention() {
 
         <img
 
-          src={`/attention/letter.JPEG`}
+          src={`/attention/letter.webp`}
         />
       </div>
       <div className="grid grid-cols-1 border-2 p-4 gap-4">

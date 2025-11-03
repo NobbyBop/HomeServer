@@ -53,7 +53,7 @@ for (let {input, output} of inputOutput){
     } else {
       files.forEach(file => {
         const ext = path.extname(file).toLowerCase();
-        if(['.jpg', '.jpeg', '.png'].includes(ext) && !file.includes("thumbnail")){
+        if(['.webp'].includes(ext) && !file.includes("thumbnail")){
           photoList.push(file)
         }
       })

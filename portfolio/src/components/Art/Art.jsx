@@ -9,7 +9,7 @@ function Art() {
       medium: "Photography",
       date: "2025",
       link: "/art/orangeseason",
-              image: `/photos/OrangeSeason/thumbnail.JPG`,
+              image: `/photos/OrangeSeason/thumbnail.webp`,
     },
     {
       id: 1,
@@ -18,7 +18,7 @@ function Art() {
       medium: "Ballpoint pen",
       date: "2022-Present",
       link: "/art/sketchbook",
-              image: `/sketchbook/thumbnail.JPG`,
+              image: `/sketchbook/thumbnail.webp`,
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ function Art() {
       medium: "Multimedia",
       date: "2024",
       link: "/art/attention",
-              image: `/attention/thumbnail.png`,
+              image: `/attention/thumbnail.webp`,
     },
     {
       id: 3,
@@ -38,7 +38,7 @@ function Art() {
       medium: "Multimedia",
       date: "2024",
       link: "/art/mobiusline",
-              image: `/mobius/thumbnail.jpg`,
+              image: `/mobius/thumbnail.webp`,
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ function Art() {
       medium: "Ballpoint pen and collage",
       date: "2023",
       link: "/art/worldly",
-              image: `/worldly/thumbnail.JPG`,
+              image: `/worldly/thumbnail.webp`,
     },
     {
       id: 5,
@@ -57,7 +57,7 @@ function Art() {
       medium: "Ink",
       date: "2024",
       link: "/art/comfort",
-              image: `/comfort/thumbnail.JPG`,
+              image: `/comfort/thumbnail.webp`,
     },
     {
       id: 6,
@@ -66,12 +66,12 @@ function Art() {
       medium: "guess",
       date: "Ongoing",
       link: "/art/photography",
-              image: `/photos/thumbnail.JPG`,
+              image: `/photos/thumbnail.webp`,
     }
   ];
   return (
     <div className={`bg-cover bg-center p-4`} 
-    style={{ backgroundImage: "url('images/HomeBG2.png')", backgroundPosition: "center" }}>
+    style={{ backgroundImage: "url('images/HomeBG2.webp')", backgroundPosition: "center" }}>
     <div className="flex flex-col items-center min-h-screen font-[monospace]">
       <div><Navigation displayName="true" underline="false"/></div>
 
