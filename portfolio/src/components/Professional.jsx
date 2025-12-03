@@ -36,7 +36,7 @@ function Professional(){
                 have expertise in topics such as ARM Assembly, C, Linux, Bash, and more. (I actually built
                 an AI agent to make my life a little easier. It searches through the textbook, looks at course
                 logistics, and more. You can view that {" "}
-                <a href="https://agentuity.com/blog/community-contributions-hiring-manager"
+                <a href="https://github.com/NobbyBop/cs392-bun"
                     target="_blank"
                     className="text-blue-600 hover:underline">
                         here
