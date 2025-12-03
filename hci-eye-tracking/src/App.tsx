@@ -10,7 +10,7 @@ export function App() {
   let [milliseconds, setMilliseconds] = useState(0);
   let [showResetButton, setShowResetButton] = useState(false);
 
-  const intervalRef = useRef<Timer | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(
     ()=>{

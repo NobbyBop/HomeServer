@@ -24,7 +24,7 @@ services:
     restart: 'unless-stopped'
   
   hci:
-    build: ./HCI-Eye-Tracking-Test
+    build: ./hci-eye-tracking
     container_name: hci
     ports:
       - 8001:8001
