@@ -88,9 +88,6 @@ function Professional(){
             <div><Navigation displayName="true" underline="false"/></div>
             <div className="flex flex-col items-center justify-center lg:max-w-1/2 gap-4">
                 <div className="p-2"></div>
-                <p className="border-2 border-gray-200 bg-white/50 p-4">Throughout my professional experience, I have consistently solved problems and created solutions. 
-                I have quickly adopted new technologies and delivered tangible results. Please see my professional history below.
-                </p>
                 {professionalHistory.map((experience)=>{ return (
                     <div className="flex flex-col lg:flex-row border-2 border-gray-200 bg-white/50 gap-4 p-4">
                         <div className="">
