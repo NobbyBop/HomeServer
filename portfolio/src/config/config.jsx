@@ -109,7 +109,7 @@ export const mobiusConfig = {
     { src: "/mobius/headings/croppedbeatles.webp", className: "" },
   ],
   items: mobius,
-  backgroundClass: "bg-center bg-repeat-y",
+  backgroundClass: "bg-center bg-repeat",
   backgroundImageUrl: "/images/MobiusBG.webp"
 };
 
@@ -139,7 +139,7 @@ export const sketchbookConfig = {
   imageFolder: "/sketchbook/",
   showCaptions: false,
   items: sketchbook,
-  backgroundClass:"bg-center bg-repeat-y",
+  backgroundClass:"bg-center bg-repeat",
   backgroundImageUrl:"/images/SketchbookBG.webp"
 }
 
@@ -193,7 +193,7 @@ export const comfortConfig = {
         }
     ],
     backgroundImageUrl:"/images/ComfortBG.webp",
-    backgroundClass:"bg-repeat-y"
+    backgroundClass:"bg-center bg-repeat"
 }
 
 export const worldlyConfig = {

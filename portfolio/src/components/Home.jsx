@@ -5,7 +5,7 @@ function Home() {
     style={{ backgroundImage: "url('images/HomeBG3.webp')", backgroundPosition: 'top' }}>
       <div><Navigation displayName="true" underline="false"/></div>
 
-      <div className="grid lg:grid-cols-2 border-2 border-gray-200 bg-white/50 p-4 lg:max-w-1/2 gap-4">
+      <div className="grid lg:grid-cols-2 border-2 border-gray-200 bg-white/50 p-4 lg:max-w-1/2 md:max-w-1/2 gap-4">
         <img
           className="w-full border-2"
           src="/images/me.webp"
