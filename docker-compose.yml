@@ -12,6 +12,9 @@ services:
     ports:
       - "443:443" 
     volumes:
+
+        # IMPORTANT - If migrating computers, may need to change these!!!
+
       - /home/raspi/HomeServer/nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/mysslcerts/origincert:/etc/ssl/ssl_certificate:ro
       - /etc/mysslcerts/originkey:/etc//ssl/ssl_certificate_key:ro
