@@ -13,7 +13,8 @@ services:
       - "443:443" 
     volumes:
       - /home/raspi/HomeServer/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /etc/mysslcerts/origincert:/etc/ssl/ssl_certificate:ro
+      - /etc/mysslcerts/originkey:/etc//ssl/ssl_certificate_key:ro
       - /var/log/nginx:/var/log/nginx
     restart: 'unless-stopped'
     depends_on:
