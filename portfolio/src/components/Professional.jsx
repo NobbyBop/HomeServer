@@ -77,7 +77,7 @@ function Professional(){
                 containing data on various types of energy production and consumption. This was my first experience
                 using data mining and visualization techniques in Python. It was a great first professional experience,
                 and allowed me the opportunity to grow technically and professionally in a working environment. </p>),
-            date: "May 2024 - May 2025",
+            date: "May 2023 - May 2024",
             image: "/images/LIINES.webp"
         }
     ]
