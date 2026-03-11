@@ -58,7 +58,7 @@ function Professional(){
                 and data flows to take users through the entire process of scheduling and tracking their required
                 OSHA training, as well as providing a helpful interface for administrators. 
             </p>),
-            date: "August 2024 - Present",
+            date: "May 2024 - August 2024",
             image: "/images/Mericle.webp"
         },
         {
@@ -77,7 +77,7 @@ function Professional(){
                 containing data on various types of energy production and consumption. This was my first experience
                 using data mining and visualization techniques in Python. It was a great first professional experience,
                 and allowed me the opportunity to grow technically and professionally in a working environment. </p>),
-            date: "August 2024 - Present",
+            date: "May 2024 - May 2025",
             image: "/images/LIINES.webp"
         }
     ]
