@@ -21,7 +21,7 @@ function Professional(){
                     className="text-blue-600 hover:underline">
                         here
                 </a>{"."}</p>),
-            date: "May 2025 - Present",
+            date: "May 2025 - August 2025",
             image: "/images/Agentuity.webp"
         },
         {
