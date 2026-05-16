@@ -10,21 +10,34 @@
     </head>
     <body class="app">
         <div class="content">
-            <h1>Phineas and Ferb Song of the Day (.com)</h1>
-            <p>The song of the day today is...<p>
+            <h1 class="pageTitle">Phineas and Ferb Song of the Day</h1>
+            <p class="songOfTheDay">The song of the day today is...<p>
             <div class="songDiv">
-                <img class="cover" src="{{image}}">
-                <p class="trackTitle">{{name}} <a href="{{url}}">(listen on spotify)</a></p>
-                <p>by {% for artist in artists %}
+                <img class="cover" alt="{{altText}}" src="{{image}}">
+                <p ><span class="trackTitle">"{{name}}"</span> <br><a href="{{url}}">(listen on spotify)</a></p>
+                <p class="artists">by {% for artist in artists %}
                     {{artist}},
                     {% endfor %}</p>
             </div>
         </div>
+        <p class="whiteText">NEXT SONG DROPS -> <span id="timer"></span></p>
     </body>
     <style>
         @font-face {
             font-family: BoldDoodle;
-            src: url("fonts/BoldDoodle-Regular.ttf");
+            src: url("fonts/bolddoodle.ttf");
+        }
+        @font-face {
+            font-family: bilderberg;
+            src: url("fonts/bilderberg.otf");
+        }
+        @font-face {
+            font-family: eroded;
+            src: url("fonts/eroded.ttf");
+        }
+        @font-face {
+            font-family: orangeave;
+            src: url("fonts/orangeave.otf");
         }
         .app {
             background-color: purple;
@@ -32,13 +45,25 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: BoldDoodle;
+        }
+        .pageTitle{
+            font-family: eroded;
+            font-size: 400%;
+        }
+        .songOfTheDay {
+            font-family: orangeave;
+            font-size: 150%;
+        }
+        .trackTitle {
+            font-family: bolddoodle;
+            font-size: 200%;
         }
         .content {
-            border-left: 20px solid red;
-            border-right: 20px solid red;
+            border-left: 20px groove orange;
+            border-right: 20px groove orange;
             background-color: yellow;
-            padding: 5%;
+            padding: 2%;
+            border-style: ;
         }
         .cover {
             max-width: 50%;
@@ -47,5 +72,37 @@
             padding: 1%;
             border: 5px dotted black;
         }
+        .artists {
+            font-family: bilderberg;
+        }
+        .whiteText{
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .pageTitle {
+            font-size: 300%;
+            }
+        
+        .cover {
+            max-width: 100%;
+        }
+        }
     </style>
+    <script>
+        const tomorrow = new Date();
+        tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+        tomorrow.setUTCHours(0, 0, 0, 0);
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = tomorrow - now;
+            var seconds = Math.floor(distance / 1000);
+            document.getElementById("timer").innerHTML = seconds;
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "NOW! REFRESH!";
+            }
+        }, 1000);
+
+    </script>
 </html>

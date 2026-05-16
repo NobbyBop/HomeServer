@@ -5,7 +5,16 @@ from spotify import getSongOfTheDay
 class PNF(s.BaseHTTPRequestHandler):
   
     def do_GET(self):
-        if self.path != "/":
+        
+        if self.path.startswith("/fonts"):
+            print(self.path)
+            with open(self.path[1:], 'rb') as f:
+                self.send_response(200)
+                self.send_header('content-type', 'font/ttf')
+                self.end_headers()
+                self.wfile.write(f.read())
+            return
+        elif self.path != "/":
             self.send_response(404)
             self.send_header('content-type', 'text/html')
             self.end_headers()
