@@ -23,7 +23,9 @@ ACCESS_TOKEN=xxx
 REFRESH_TIMESTAMP=....
 ```
 
-2. There are probably edge case bugs, I tried my best to test every possible combo of cache, tracklist, and .env. The thing that is hard to test is realtime checking. Will have to monitor as the days pass to make sure the song changes.
+2. As I mentioned I wanted to keep web-fetching to a minimum, hence the cache and tracklist. I also made the fetching parallel per album, so it is really fast. Fun to learn about Python threads.
 
-3. I think this is funny, please check it out and listen to Phineas and Ferb music (if you don't have Spotify use Google.)
+3. There are probably edge case bugs, I tried my best to test every possible combo of cache, tracklist, and .env. The thing that is hard to test is realtime checking. Will have to monitor as the days pass to make sure the song changes.
+
+4. I think this is funny, please check it out and listen to Phineas and Ferb music (if you don't have Spotify use Google.)
 `https://pnfsotd.nicholasmirigliani.com`
