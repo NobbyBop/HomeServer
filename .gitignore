@@ -1,1 +1,7 @@
 node_modules
+.venv
+.env
+.vscode
+__pycache__
+tracklist.json
+cache.json
