@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>PNFSOD</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body class="app">
+        <div class="content">
+            <h1>Phineas and Ferb Song of the Day (.com)</h1>
+            <p>The song of the day today is...<p>
+            <div class="songDiv">
+                <img class="cover" src="{{image}}">
+                <p class="trackTitle">{{name}} <a href="{{url}}">(listen on spotify)</a></p>
+                <p>by {% for artist in artists %}
+                    {{artist}},
+                    {% endfor %}</p>
+            </div>
+        </div>
+    </body>
+    <style>
+        @font-face {
+            font-family: BoldDoodle;
+            src: url("fonts/BoldDoodle-Regular.ttf");
+        }
+        .app {
+            background-color: purple;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: BoldDoodle;
+        }
+        .content {
+            border-left: 20px solid red;
+            border-right: 20px solid red;
+            background-color: yellow;
+            padding: 5%;
+        }
+        .cover {
+            max-width: 50%;
+        }
+        .songDiv {
+            padding: 1%;
+            border: 5px dotted black;
+        }
+    </style>
+</html>
