@@ -7,19 +7,21 @@ import threading
 import json
 import random
 
+envLock = threading.Lock()
 def updateDotEnv(accessToken, refreshTimestamp):
+    envLock.acquire()
     newEnv = ""
     with open(".env", "r") as f:
         line = f.readline()
         while line.strip() != "":
+            print(line)
             if "CLIENT" in line:
-                newEnv += line
-                line = f.readline()
-            else:
-                break
+                newEnv += line + "\n"
+            line = f.readline()
     newEnv += f"ACCESS_TOKEN={accessToken}\nREFRESH_TIMESTAMP={refreshTimestamp}"
     with open(".env", "w") as f:
         f.write(newEnv)
+    envLock.release()
     
 def checkAndGetSpotifyToken():
     """
@@ -92,6 +94,8 @@ def getSongOfTheDay():
     Also, creates those two files if they don't exist yet.
     """
 
+    print("Entering song of the day.")
+
     date = time.gmtime()
     checkYear = date.tm_year
     checkMonth = date.tm_mon
@@ -108,20 +112,22 @@ def getSongOfTheDay():
             print("Retrieved song from cache!")
             return cache
     
+    print("Cache not valid.")
+    
     # Cache not valid, get next track from tracklist.
-    with open("tracklist.json", "a"):
-        pass
-    with open("tracklist.json", "r") as f:
-        content = f.read().strip()
-    if len(content) == 0:
+    try:
+        with open("tracklist.json", "r") as f:
+            content = f.read().strip()
+    except:
         populateTracklist()
         with open("tracklist.json", "r") as f:
             content = f.read().strip()
-        if len(content) == 0:
-            raise RuntimeError("Failed to get song of the day from tracklist")
         
-    tracklist = json.loads(content)
-    track_id = tracklist.pop()
+    tracks = json.loads(content)
+    if len(tracks) == 0:
+        populateTracklist()
+
+    track_id = tracks.pop()
     track = getTrackInfo(track_id)
     with open("cache.json", "w") as f:
         f.write(json.dumps(
@@ -140,7 +146,7 @@ def getSongOfTheDay():
     # We have the track of the day now. If that was the last track, refresh it.
     if len(tracklist) > 0:
         with open("tracklist.json", "w") as f:
-            f.write(json.dumps(tracklist))
+            f.write(json.dumps(tracks))
     else:
         populateTracklist()
     return track
@@ -190,7 +196,7 @@ def populateTracklist():
     Using a set of predetermined Phineas and Ferb albums, fetches all songs
     and populates tracklist.json with their IDs as a list.
     """
-
+    
     ALBUM_IDS =[
         "2NlTgt3Btt2QZlolG41J1j",
         "1mwUxOieg2GvQn4wm5bJR1",
@@ -215,5 +221,8 @@ def populateTracklist():
     for t in threads:
         t.join()
     random.shuffle(tracklist)
+
+    if len(tracklist) < 0:
+        raise RuntimeError("Couldn't get tracks, not updating tracklist file.")
     with open("tracklist.json", "w") as f:
         f.write(json.dumps(tracklist))

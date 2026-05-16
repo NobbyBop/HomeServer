@@ -4,6 +4,12 @@ services:
     container_name: portfolio
     ports:
       - 8000:8000
+    restart: 'unless-stopped'  
+  pnf:
+    build: ./pnf
+    container_name: pnf
+    ports:
+      - 5555:5555
     restart: 'unless-stopped'
 
   jellyfin:
@@ -34,3 +40,5 @@ services:
     restart: 'unless-stopped'
     depends_on:
     - portfolio
+    - jellyfin
+    - pnf
