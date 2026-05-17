@@ -11,7 +11,7 @@ def cacheEvict(cache):
     return cache
 
 def loadCache():
-    with open("/etc/pnfsotd/cache.json", "r") as f:
+    with open("/etc/pnfsotd/cache2.json", "r") as f:
         content = f.read()
     if len(content) != 0:
         cache = json.loads(content)
@@ -20,7 +20,7 @@ def loadCache():
         return {}
 
 def writeCache(cache):
-    with open("/etc/pnfsotd/cache.json", "w") as f:
+    with open("/etc/pnfsotd/cache2.json", "w") as f:
         f.write(json.dumps(cache))
     
 def getSongOfTheDay(utc_offset):
@@ -35,20 +35,23 @@ def getSongOfTheDay(utc_offset):
     userDate = f"{year}-{month}-{day}"
 
     cache = loadCache()
+    cache = cacheEvict(cache)
     if userDate in cache:
         return cache[userDate]
     else:
         # Get song or whatever here...
-        songName=""
-        songImage=""
-        songUrl=""
-        songArtists=""
+        songName=f"Song:{userDate}"
+        songImage=f"Image:{userDate}"
+        songAltText=f"AltText:{userDate}"
+        songUrl=f"Url:{userDate}"
+        songArtists=f"Artists:{userDate}"
         
         cache = cacheEvict(cache)
 
         cacheEntry = {
             "name":songName,
             "image":songImage,
+            "altText":songAltText,
             "url":songUrl,
             "artists":songArtists,
             "evict":evictionTime.timestamp()
@@ -57,5 +60,5 @@ def getSongOfTheDay(utc_offset):
         writeCache(cache)
         return cacheEntry
     
-getSongOfTheDay(0)
+print(getSongOfTheDay(20))
     
