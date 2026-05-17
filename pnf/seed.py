@@ -71,46 +71,6 @@ def spotifyGet(url, data={}):
         
         return response.json()
 
-trackInfo = []
-trackInfoLock = threading.Lock()
-def getTrackInfo(track_id):
-    global trackInfo
-    """
-    Gets title, image, link to track based on Spotify ID.
-    """
-    try:
-        body = spotifyGet(f"https://api.spotify.com/v1/tracks/{track_id}")
-    except RuntimeError as e:
-        raise RuntimeError(f"Failed to get info for track id {track_id}\n{e}")
-    if "images" not in body["album"] or len(body["album"]["images"]) == 0 or "url" not in body["album"]["images"][0]:
-        imageUrl = "https://picsum.photos/640"
-        altText = "Placeholder image, track image not found."
-    else:
-        imageUrl = body["album"]["images"][0]["url"]
-        altText = f"Track image for {body["name"]}."
-
-    trackInfoLock.acquire()
-    trackInfo.append({
-        "name":body["name"],
-        "image":imageUrl,
-        "altText":altText,
-        "artists": [artist["name"] for artist in body["artists"]],
-        "url":f"https://open.spotify.com/track/{track_id}"
-    })
-    trackInfoLock.release()
-
-def getAllTrackInfo():
-    global tracklist
-    threads = []
-    for track_id in tracklist:
-        t = threading.Thread(target=getTrackInfo, args=(track_id,))
-        threads.append(t)
-    for t in threads:
-        t.start()
-    for t in threads:
-        t.join()
-
-
 trackLock = threading.Lock()
 tracklist = []
 def addAlbumTracks(album_id):
@@ -160,10 +120,50 @@ def populateTracklist():
     for t in threads:
         t.join()
 
+trackInfo = []
+trackInfoLock = threading.Lock()
+def getTrackInfo(track_id):
+    global trackInfo
+    """
+    Gets title, image, link to track based on Spotify ID.
+    """
+    try:
+        body = spotifyGet(f"https://api.spotify.com/v1/tracks/{track_id}")
+    except RuntimeError as e:
+        raise RuntimeError(f"Failed to get info for track id {track_id}\n{e}")
+    if "images" not in body["album"] or len(body["album"]["images"]) == 0 or "url" not in body["album"]["images"][0]:
+        imageUrl = "https://picsum.photos/640"
+        altText = "Placeholder image, track image not found."
+    else:
+        imageUrl = body["album"]["images"][0]["url"]
+        altText = f"Track image for {body["name"]}."
+
+    trackInfoLock.acquire()
+    trackInfo.append({
+        "name":body["name"],
+        "image":imageUrl,
+        "altText":altText,
+        "artists": [artist["name"] for artist in body["artists"]],
+        "url":f"https://open.spotify.com/track/{track_id}"
+    })
+    trackInfoLock.release()
+
+def addAllTrackInfo():
+    global tracklist
+    threads = []
+    for track_id in tracklist:
+        t = threading.Thread(target=getTrackInfo, args=(track_id,))
+        threads.append(t)
+    for t in threads:
+        t.sleep(1)
+        t.start()
+    for t in threads:
+        t.join()
+
 if __name__ == "__main__":
     getSpotifyToken()
-    spotifyGet(f"https://api.spotify.com/v1/albums/2NlTgt3Btt2QZlolG41J1j/tracks")
-    # populateTracklist()
-    # getAllTrackInfo()
-    # print(trackInfo)
+    populateTracklist()
+    getAllTrackInfo()
+    with open("/etc/pnfsotd/tracklist.json", "w") as f:
+        f.write(json.dumps(trackInfo))
 
