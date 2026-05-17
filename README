@@ -1,0 +1,6 @@
+# Home Server
+This repo contains all the things I host on my home web server, a raspberry pi.
+Currently the services are:
+1. Portfolio - my personal art and professional projects portfolio
+2. PNFSOTD.com - Phineas and Ferb Song of the Day
+3. Jellyfin Media Server

@@ -36,6 +36,8 @@ services:
       - /home/raspi/HomeServer/nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/mysslcerts/origincert:/etc/ssl/ssl_certificate:ro
       - /etc/mysslcerts/originkey:/etc//ssl/ssl_certificate_key:ro
+      - /etc/mysslcerts/pnfcert:/etc/ssl/pnfcert:ro
+      - /etc/mysslcerts/pnfcert_key:/etc//ssl/pnfcert_key:ro
       - /var/log/nginx:/var/log/nginx
     restart: 'unless-stopped'
     depends_on:
