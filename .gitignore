@@ -3,5 +3,7 @@ node_modules
 .env
 .vscode
 __pycache__
+
 tracklist.json
 cache.json
+.token

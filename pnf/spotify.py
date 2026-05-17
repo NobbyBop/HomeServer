@@ -10,16 +10,8 @@ import random
 envLock = threading.Lock()
 def updateDotEnv(accessToken, refreshTimestamp):
     envLock.acquire()
-    newEnv = ""
-    with open(".env", "r") as f:
-        line = f.readline()
-        while line.strip() != "":
-            print(line)
-            if "CLIENT" in line:
-                newEnv += line + "\n"
-            line = f.readline()
-    newEnv += f"ACCESS_TOKEN={accessToken}\nREFRESH_TIMESTAMP={refreshTimestamp}"
-    with open(".env", "w") as f:
+    newEnv = f"ACCESS_TOKEN={accessToken}\nREFRESH_TIMESTAMP={refreshTimestamp}"
+    with open(".token", "w") as f:
         f.write(newEnv)
     envLock.release()
     
@@ -30,6 +22,8 @@ def checkAndGetSpotifyToken():
     one and updates the REFRESH_TIMESTAMP and ACCESS_TOKEN in .env.
     """
     load_dotenv(override=True)
+    load_dotenv(".token", override=True)
+
     client_id = os.environ.get("CLIENT_ID")
     client_secret = os.environ.get("CLIENT_SECRET")
 
@@ -69,11 +63,7 @@ def spotifyGet(url, data={}):
     """
     Helper function for making 
     """
-    try:
-        checkAndGetSpotifyToken()
-    except RuntimeError as e:
-        raise RuntimeError(e)
-    
+    load_dotenv(".token", override=True)
     response = requests.get(url,
         headers={
             "Authorization":"Bearer " + str(os.environ.get("ACCESS_TOKEN"))
@@ -81,7 +71,7 @@ def spotifyGet(url, data={}):
         data=data
     )
     if response.status_code != 200:
-        raise RuntimeError(f"Failed to post. Status code: {response.status_code}")
+        raise RuntimeError(f"Failed to get. Status code: {response.status_code}")
     
     return response.json()
 
@@ -94,17 +84,15 @@ def getSongOfTheDay():
     Also, creates those two files if they don't exist yet.
     """
 
-    print("Entering song of the day.")
-
     date = time.gmtime()
     checkYear = date.tm_year
     checkMonth = date.tm_mon
     checkDay = date.tm_mday
 
     # Check cache first
-    with open("cache.json", "a"):
+    with open("/etc/pnfsotd/cache.json", "a"):
         pass
-    with open("cache.json", "r") as f:
+    with open("/etc/pnfsotd/cache.json", "r") as f:
         content = f.read().strip()
     if len(content) > 0:
         cache = json.loads(content)
@@ -114,22 +102,26 @@ def getSongOfTheDay():
     
     print("Cache not valid.")
     
-    # Cache not valid, get next track from tracklist.
-    try:
-        with open("tracklist.json", "r") as f:
-            content = f.read().strip()
-    except:
-        populateTracklist()
-        with open("tracklist.json", "r") as f:
-            content = f.read().strip()
+    gotTracklist = False
+    while not gotTracklist:
+        try:
+            with open("/etc/pnfsotd/tracklist.json", "r") as f:
+                content = f.read().strip()
+        except RuntimeError as e:
+            print(f"ERROR reading tracklist.json: {e}")
+            populateTracklist()
+            with open("/etc/pnfsotd/tracklist.json", "r") as f:
+                content = f.read().strip()
+        if len(content) == 0:
+            print("ERROR tracklist empty.")
+            populateTracklist()
+        else:
+            gotTracklist=True
         
     tracks = json.loads(content)
-    if len(tracks) == 0:
-        populateTracklist()
-
     track_id = tracks.pop()
     track = getTrackInfo(track_id)
-    with open("cache.json", "w") as f:
+    with open("/etc/pnfsotd/cache.json", "w") as f:
         f.write(json.dumps(
             {
             "name": track["name"],
@@ -144,8 +136,8 @@ def getSongOfTheDay():
         ))
     
     # We have the track of the day now. If that was the last track, refresh it.
-    if len(tracklist) > 0:
-        with open("tracklist.json", "w") as f:
+    if len(tracks) > 0:
+        with open("/etc/pnfsotd/tracklist.json", "w") as f:
             f.write(json.dumps(tracks))
     else:
         populateTracklist()
@@ -155,6 +147,10 @@ def getTrackInfo(track_id):
     """
     Gets title, image, link to track based on Spotify ID.
     """
+    try:
+        checkAndGetSpotifyToken()
+    except RuntimeError as e:
+        raise RuntimeError(e)
     try:
         body = spotifyGet(f"https://api.spotify.com/v1/tracks/{track_id}")
     except RuntimeError as e:
@@ -196,6 +192,7 @@ def populateTracklist():
     Using a set of predetermined Phineas and Ferb albums, fetches all songs
     and populates tracklist.json with their IDs as a list.
     """
+    print("Called populate tracklist.")
     
     ALBUM_IDS =[
         "2NlTgt3Btt2QZlolG41J1j",
@@ -216,6 +213,11 @@ def populateTracklist():
     for id in ALBUM_IDS:
         t = threading.Thread(target=addAlbumTracks, args=(id,))
         threads.append(t)
+    try:
+        checkAndGetSpotifyToken()
+    except RuntimeError as e:
+        raise RuntimeError(e)
+    load_dotenv(".token", override=True)
     for t in threads:
         t.start()
     for t in threads:
@@ -224,5 +226,5 @@ def populateTracklist():
 
     if len(tracklist) < 0:
         raise RuntimeError("Couldn't get tracks, not updating tracklist file.")
-    with open("tracklist.json", "w") as f:
+    with open("/etc/pnfsotd/tracklist.json", "w") as f:
         f.write(json.dumps(tracklist))
