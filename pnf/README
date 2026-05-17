@@ -1,7 +1,7 @@
 # PHINEAS AND FERB SONG OF THE DAY WEBSITE
 
 ## TODO
-- [ ] Need to make the tracklist and cache outside of the build environment and mount them as volumes so the song of the day is consistent when tearing down and rebuilding the container.
+- [X] Need to make the tracklist and cache outside of the build environment and mount them as volumes so the song of the day is consistent when tearing down and rebuilding the container.
     - [ ] Potentially, migrate the song fetching to a cron job, store somewhere locally, then have the webpage read the local thing only.
 - [ ] Would like to make /{timezone} a route so people in different time zones can see the song refresh at midnight.
     - [ ] Probably requires keeping 2-3 cache entries instead and then checking the time based on the route. 
