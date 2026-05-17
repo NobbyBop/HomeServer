@@ -24,7 +24,7 @@ And you'll need to go to the Spotify developer portal for that info.
 6. If the track is the last one on the tracklist, I also call `populateTracklist()`.
 
 ## Other things
-1. Spotify Access Tokens only last 1 hour, so I keep track of when it will expire by writing to `.env` dynamically. Once it reaches `REFRESH_TIMESTAMP`, I get another access token.
+1. Spotify Access Tokens only last 1 hour, so I keep track of when it will expire by writing to `.token` dynamically. Once it reaches `REFRESH_TIMESTAMP`, I get another access token.
 
 ```
 ACCESS_TOKEN=xxx
