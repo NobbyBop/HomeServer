@@ -152,18 +152,24 @@ def addAllTrackInfo():
     global tracklist
     threads = []
     for track_id in tracklist:
-        t = threading.Thread(target=getTrackInfo, args=(track_id,))
-        threads.append(t)
-    for t in threads:
-        t.sleep(1)
-        t.start()
-    for t in threads:
-        t.join()
+        getTrackInfo(track_id)
+    # for track_id in tracklist:
+    #     t = threading.Thread(target=getTrackInfo, args=(track_id,))
+    #     threads.append(t)
+    # for t in threads:
+    #     t.sleep(1)
+    #     t.start()
+    # for t in threads:
+    #     t.join()
 
 if __name__ == "__main__":
     getSpotifyToken()
     populateTracklist()
-    getAllTrackInfo()
+    addAllTrackInfo()
+    data = {
+        "new": trackInfo,
+        "used": []
+    }
     with open("/etc/pnfsotd/tracklist.json", "w") as f:
-        f.write(json.dumps(trackInfo))
+        f.write(json.dumps(data))
 

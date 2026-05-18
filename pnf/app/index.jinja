@@ -11,7 +11,7 @@
     <body class="app">
         <div class="content">
             <h1 class="pageTitle">Phineas and Ferb Song of the Day</h1>
-            <p class="songOfTheDay">The song of the day today is...<p>
+            <p class="songOfTheDay">The song of the day is...<p>
             <div class="songDiv">
                 <img class="cover" alt="{{altText}}" src="{{image}}">
                 <p ><span class="trackTitle">"{{name}}"</span> <br><a href="{{url}}">(listen on spotify)</a></p>
@@ -20,7 +20,8 @@
                     {% endfor %}</p>
             </div>
         </div>
-        <p class="whiteText">NEXT SONG DROPS -> <span id="timer"></span></p>
+        <p class="whiteText">NEXT SONG DROPS AT MIDNIGHT, CURRENT TIME-> <span id="timer"></span></p>
+        <p style="color:yellow">Not seeing the right time? Go to pnfsotd.com/[utc_offset]. (Google that if you don't know what it is, it is very easy. Example: "What is UTC offset for EST?")</p>
     </body>
     <style>
         @font-face {
@@ -77,6 +78,7 @@
         }
         .whiteText{
             color: white;
+            font-size:150%;
         }
         
         @media (max-width: 768px) {
@@ -90,19 +92,13 @@
         }
     </style>
     <script>
-        const tomorrow = new Date();
-        tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
-        tomorrow.setUTCHours(0, 0, 0, 0);
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = tomorrow - now;
-            var seconds = Math.floor(distance / 1000);
-            document.getElementById("timer").innerHTML = seconds;
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("demo").innerHTML = "NOW! REFRESH!";
-            }
+        const offsetMs = {{offset}} * 60 * 60 * 1000;
+        setInterval(function() {
+            var userTime = new Date(new Date().getTime() + offsetMs);
+            var h = String(userTime.getUTCHours()).padStart(2, '0');
+            var m = String(userTime.getUTCMinutes()).padStart(2, '0');
+            var s = String(userTime.getUTCSeconds()).padStart(2, '0');
+            document.getElementById("timer").innerHTML = `${h}:${m}:${s}`;
         }, 1000);
-
     </script>
 </html>

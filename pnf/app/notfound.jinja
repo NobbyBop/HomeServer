@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body class="app">
+        <div class="content">
+            <h1 class="pageTitle">Phineas and Ferb Song of the Day</h1>
+            <p class="trackTitle">404 not found</p>
+            <p>Try going to</p>
+            <ul>
+                {% for i in range(-12, 15, 1) %}
+                    <li><a href="/{{ i }}">pnfsotd.com/{{ i }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+    <style>
+        @font-face {
+            font-family: eroded;
+            src: url("fonts/eroded.ttf");
+        }
+        @font-face {
+            font-family: BoldDoodle;
+            src: url("fonts/bolddoodle.ttf");
+        }
+        .app {
+            background-color: purple;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .pageTitle {
+            font-family: eroded;
+            font-size: 400%;
+        }
+        .trackTitle {
+            font-family: bolddoodle;
+            font-size: 200%;
+        }
+        .content {
+            border-left: 20px groove orange;
+            border-right: 20px groove orange;
+            background-color: yellow;
+            padding: 2%;
+        }
+        @media (max-width: 768px) {
+            .pageTitle {
+                font-size: 300%;
+            }
+        }
+    </style>
+</html>

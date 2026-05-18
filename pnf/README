@@ -1,39 +1,26 @@
 # PHINEAS AND FERB SONG OF THE DAY WEBSITE
 
-## TODO
-- [X] Need to make the tracklist and cache outside of the build environment and mount them as volumes so the song of the day is consistent when tearing down and rebuilding the container.
-    - [ ] Potentially, migrate the song fetching to a cron job, store somewhere locally, then have the webpage read the local thing only.
-- [ ] Would like to make /{timezone} a route so people in different time zones can see the song refresh at midnight.
-    - [ ] Probably requires keeping 2-3 cache entries instead and then checking the time based on the route. 
-
 ## Welcome to PNFSOTD.com
 I made this as a joke but I ended up trying to do it somewhat optimally as an exercise.
-Structure your `.env` like this:
+
+## How does it work?
+0. I seed my database with all P&F songs from Spotify using seed/seed.py.
+    - Structure your `seed/.env` like this:
 ```
 CLIENT_ID=xxx
 CLIENT_SECRET=xxx
 ```
-And you'll need to go to the Spotify developer portal for that info.
-
-## How does it work?
-1. When you visit the website, it calls the function `getSongOfTheDay()`.
+    - And you'll need to go to the Spotify developer portal for that info.
+1. When you visit the website, it calls the function `getSongOfTheDay(utc_offset)`.
 2. First that checks `cache.json` to see if the song of the day has already been determined.
 3. If not, it pops a track off of `tracklist.json` and looks up the info with the Spotify API.
-4. If the tracklist doesn't exist or is empty, it will call `populateTracklist()` which re-fetches all tracks from the albums I wanted to include.
-5. Once the track of the day has been determined, it is written to the cache and it expires on the next day (UTC).
+5. Once the track of the day has been determined, it is written to the cache and it expires in a few days (UTC).
 6. If the track is the last one on the tracklist, I also call `populateTracklist()`.
 
 ## Other things
-1. Spotify Access Tokens only last 1 hour, so I keep track of when it will expire by writing to `.token` dynamically. Once it reaches `REFRESH_TIMESTAMP`, I get another access token.
+1. As I mentioned I wanted to keep web-fetching to a minimum, hence the cache and tracklist. I also made the fetching parallel per album, so it is really fast. I got rate limited when I tried to do it per track, and not worth the hassle since it only runs one time ever. Fun to learn about Python threads.
 
-```
-ACCESS_TOKEN=xxx
-REFRESH_TIMESTAMP=....
-```
+2. There are probably edge case bugs, I tried my best to test every possible combo of cache, tracklist, and .env. The thing that is hard to test is realtime checking. Will have to monitor as the days pass to make sure the song changes.
 
-2. As I mentioned I wanted to keep web-fetching to a minimum, hence the cache and tracklist. I also made the fetching parallel per album, so it is really fast. Fun to learn about Python threads.
-
-3. There are probably edge case bugs, I tried my best to test every possible combo of cache, tracklist, and .env. The thing that is hard to test is realtime checking. Will have to monitor as the days pass to make sure the song changes.
-
-4. I think this is funny, please check it out and listen to Phineas and Ferb music (if you don't have Spotify use Google.)
-`https://pnfsotd.nicholasmirigliani.com`
+3. I think this is funny, please check it out and listen to Phineas and Ferb music (if you don't have Spotify use Google.)
+`https://pnfsotd.com/`
