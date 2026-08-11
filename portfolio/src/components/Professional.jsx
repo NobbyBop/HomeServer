@@ -8,11 +8,10 @@ function Professional(){
             link: "https://www.noom.com/",
             description: (
                 <p>
-                    I am an agentic engineer at Noom, focusing on building and optimizing AI agents for health and wellness applications. 
-                    I work on improving agent autonomy, tool usage, and multi-agent systems to enhance user experience and health outcomes.
+		    At Noom, I am developing a company-wide agent platform. I'm working on improving agent-centered development with loops and self learning. So far, I've been exposed to a lot of new technologies such as AWS Agentcore, advanced GitHub workflows, and IaC. I'm adopting an agent-first style of building and am excited to keep learning!
                 </p>
             ),
-            date: "Present",
+            date: "June 2026 - Present",
             image: "/images/noom.webp"
         },
         {

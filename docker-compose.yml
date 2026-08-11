@@ -13,20 +13,6 @@ services:
     volumes:
       - /etc/pnfsotd/:/etc/pnfsotd/
     restart: 'unless-stopped'
-
-  jellyfin:
-    image: jellyfin/jellyfin
-    container_name: jellyfin
-    ports:
-      - 8096:8096
-    # IMPORTANT - If migrating computers, may need to change volume info.
-    volumes:
-      - ~/.jellyfin/config:/config
-      - ~/.jellyfin/cache:/cache
-      - type: bind
-        source: /media/WD_BLACK
-        target: /media
-    restart: 'unless-stopped'
   nginx:
     image: nginx:1-alpine
     container_name: nginx
@@ -44,5 +30,4 @@ services:
     restart: 'unless-stopped'
     depends_on:
     - portfolio
-    - jellyfin
     - pnf
