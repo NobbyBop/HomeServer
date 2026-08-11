@@ -17,7 +17,7 @@ function Home() {
             Wilkes-Barre, Pennsylvania
             </a>{". "} 
           My technical background includes web development, building AI agents, and systems programming. 
-          I'm a problem solver and love working with new technologies. I'm currently pursuing my B.S. in Computer Science from Stevens Institute of Technology. For more information, please see my {" "}
+          I'm a problem solver and love working with new technologies. I am an agentic engineer at Noom and have graduated. For more information, please see my {" "}
           <a 
           href="/Resume.pdf"
           target="_blank"

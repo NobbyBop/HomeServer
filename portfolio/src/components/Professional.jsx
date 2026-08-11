@@ -3,6 +3,19 @@ import Navigation from "./Navigation"
 function Professional(){
     const professionalHistory = [
         {
+            title: "Agentic Engineer",
+            company: "Noom",
+            link: "https://www.noom.com/",
+            description: (
+                <p>
+                    I am an agentic engineer at Noom, focusing on building and optimizing AI agents for health and wellness applications. 
+                    I work on improving agent autonomy, tool usage, and multi-agent systems to enhance user experience and health outcomes.
+                </p>
+            ),
+            date: "Present",
+            image: "/images/Noom.webp"
+        },
+        {
             title: "Software Development Intern",
             company: "Agentuity",
             link: "https://agentuity.com/",
