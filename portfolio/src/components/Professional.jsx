@@ -13,7 +13,7 @@ function Professional(){
                 </p>
             ),
             date: "Present",
-            image: "/images/noom.svg"
+            image: "/images/noom.webp"
         },
         {
             title: "Software Development Intern",
