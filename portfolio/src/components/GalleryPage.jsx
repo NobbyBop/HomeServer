@@ -1,5 +1,5 @@
 import Navigation from "./Navigation";
-import { useEffect, useState } from "react";
+import { useState } from 'react'
 
 function GalleryPage({
   title,

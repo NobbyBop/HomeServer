@@ -16,10 +16,10 @@
 # CMD ["npx", "serve", "-s", "dist", "-l", "8000"]
 
 # Was redundant, this is much simpler.
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 COPY . .
-RUN npm i
+RUN npm ci
 RUN npm run build
 EXPOSE 8000
 CMD ["npx", "serve", "-s", "dist", "-l", "8000"]
