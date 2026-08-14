@@ -58,7 +58,21 @@ for (let {input, output} of inputOutput){
         }
       })
 
-      const photoString = JSON.stringify(photoList);
+      // Preserve the checked-in gallery order so builds do not reorder existing
+      // photos based on filesystem enumeration order. Newly added photos append.
+      let orderedPhotoList = photoList;
+      try {
+        const existingPhotoList = JSON.parse(fs.readFileSync(output, 'utf8'));
+        const availablePhotos = new Set(photoList);
+        orderedPhotoList = [
+          ...existingPhotoList.filter(file => availablePhotos.has(file)),
+          ...photoList.filter(file => !existingPhotoList.includes(file)),
+        ];
+      } catch (error) {
+        // If no existing index is available, use the discovered files.
+      }
+
+      const photoString = JSON.stringify(orderedPhotoList);
 
       fs.writeFile(output, photoString, (err) => {
         if (err) {
