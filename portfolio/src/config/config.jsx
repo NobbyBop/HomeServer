@@ -125,7 +125,7 @@ export const orangeConfig = {
 
 export const photographyConfig = {
   title: "PHOTOGRAPHY",
-  description: "Taken on a Canon PowerShot ELPH 190 IS - an old (circa 2010) digital camera.",
+  description: "Photos taken on a Canon PowerShot ELPH 190 IS - an old (circa 2010) digital camera - and LUMIX ZS99.",
   imageFolder: "/photos/",
   showCaptions: false,
   items: photos.reverse(),
