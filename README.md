@@ -1,0 +1,2 @@
+# Home Server v2
+In this new iteration of my home server, I am shifting the focus away from Internet-facing applications. I will add services that run over LAN only, with my Raspberry Pi 5 as the host. I will add services as I need them, probably don't need Docker yet but maybe in the future.
