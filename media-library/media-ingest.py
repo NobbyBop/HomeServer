@@ -4,6 +4,7 @@ import os
 import sys
 import re
 import json
+from pathlib import Path
 
 """
 Goal: loop through folder, extract date
@@ -46,7 +47,8 @@ if __name__ == "__main__":
         print("Usage: media-ingest.py <path>")
         exit(1)
     
-    base_dir = sys.argv[1]
+    base_dir = Path(sys.argv[1])
+    base_dir = str(base_dir.absolute()).strip('"')
     
     # Scan dir for subdirectories - we will check all of them for photos and videos.
     # Note, these are absolute paths
