@@ -15,7 +15,7 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 
 ### 11/05/2026
 - On my first day of developing this, I build the parser and the sorter. I ran into a few problems I didn't expect. 
-- To parse the date, I borrowed a technique I found online and instead of using an image library, I just used regex in the actual bytes of the image. That seems to get the same dates I can see in the Windows Explorer.
+- To parse the date, I borrowed a technique I found online and instead of using an image library, I just used regex in the actual bytes of the image. That seems to get the same dates I can see in the Windows File Explorer.
 - I didn't realize that there would be duplicate names in images. I have stuff in iCloud uploaded from all over the place, so it does make sense.
 	- If you combine all the images into one folder, you get a scenario like this:
 		- The compiled folder contains `img-a.jpg`, `img-a.png`, and `img-a.mov`.
