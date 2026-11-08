@@ -4,3 +4,4 @@ media.json
 media-sorted.json
 
 .venv
+__pycache__

@@ -1,9 +1,15 @@
 services:
-    mongo:
+    media_mongo:
         image: mongo
-        restart: always
-        environment:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: password
         ports:
             - 27017:27017
+
+    media_backend:
+        build: ./media_library/backend/
+        ports:
+            - 8000:8000
+        environment:
+            MONGO_CONNECT_URL: "mongodb://media_mongo:27017/"
+        depends_on:
+            - media_mongo
+        

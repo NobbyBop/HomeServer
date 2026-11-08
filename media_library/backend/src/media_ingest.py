@@ -1,57 +1,16 @@
 # media-ingest.py
 
 import os
-import sys
 import re
-import json
-from pathlib import Path
+from .db import getCollection
 
-"""
-Goal: loop through folder, extract date
-If .JPG, find if there is an associated live photo .MOV
-Videos are stored as MP4 on ICloud
-
-I will store a JSON file, a list of these objects:
-{
-    path: str
-    filename: str,
-    type: photo | video,
-    live?: str (path)
-    date: {
-        year: int,
-        month: int,
-        day: int,
-        hour: int,
-        minute: int,
-        second: int,
-    } | None
-}
-
-"""
-
-def _contains(word, substrings):
+def _contains(word: str, substrings: list[str]):
     for sub in substrings:
         if sub in word:
             return True
     return False
 
-"""
-This is a starting directory, it should go into all folders inside recursively and do the following:
-1. Generate a media list for that folder, including getting live photo links
-2. Photos can be added in folders if desired, since folders enforce name uniqueness.
-3. This will make it easy to export from iCloud in the future, just download and drop the folder into the media store.
-"""
-
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: media-ingest.py <path>")
-        exit(1)
-    
-    base_dir = Path(sys.argv[1])
-    base_dir = str(base_dir.absolute()).strip('"')
-    
-    # Scan dir for subdirectories - we will check all of them for photos and videos.
-    # Note, these are absolute paths
+def ingest_folder_recursive(base_dir: str):
     found = []
     directories = [base_dir]
     while len(directories) > 0: 
@@ -63,10 +22,10 @@ if __name__ == "__main__":
             if os.path.isdir(file_abs_path):
                 directories.append(file_abs_path)
     
-    PHOTO_EXTS = [".jpg",".jpeg",".gif",".png"]
+    PHOTO_EXTS : list[str] = [".jpg",".jpeg",".gif",".png"]
     
     # List of photos and videos
-    media = []
+    media : list[dict] = []
     for media_dir in found:
         print(f"Scanning: {media_dir}") 
         files = os.listdir(media_dir)
@@ -93,6 +52,7 @@ if __name__ == "__main__":
                         "minute":int(match.group(5)),
                         "second":int(match.group(6))
                     }
+            cur["_id"] = photo_path
             cur["path"] = photo_path
             cur["filename"] = photo
             cur["type"] = "photo"
@@ -124,27 +84,13 @@ if __name__ == "__main__":
                         "minute":int(match.group(5)),
                         "second":int(match.group(6))
                     }
+            cur["_id"] = video_path
             cur["path"] = video_path
             cur["filename"] = video
             cur["type"] = "video"
             cur["date"] = date
             
             media.append(cur)
-                
-    with open("media.json", 'w') as mediafile:
-        mediafile.write(json.dumps(media))
-"""
-Dumping old code for reference for now:
-
-Get all extensions:
-
-
-exts = []
-for file in files:
-    extIdx = file.rindex(".")
-    ext = file[extIdx:]
-    if ext not in exts:
-        exts.append(ext)
-print(exts)
-
-"""
+    
+    col = getCollection()
+    col.insert_many(media)
