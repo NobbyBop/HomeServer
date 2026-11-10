@@ -34,5 +34,10 @@ def root():
 
 @app.post("/rescan")
 def rescan():
-    ingest_folder_recursive("C:\\Users\\nicho\\Documents\\Development\\HomeServer\\media-library\\Media Dump 2")
+    ingest_folder_recursive()
+    return {"success": True}
+
+@app.post("/drop")
+def drop():
+    col.drop()
     return {"success": True}
