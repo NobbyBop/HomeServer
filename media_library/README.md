@@ -6,7 +6,8 @@ A first draft of this would look like:
 - [x] Dump iCloud photos here 
 - [x] Parsed and sorted by date
 - [x] Use a database (MongoDB makes the most sense here), not a JSON file.
-- [ ] Need to figure out how I will host images (in this container, outside? not sure what is best yet.)
+- [x] Need to figure out how I will host images (in this container, outside? not sure what is best yet.)
+- [ ] Stop using regex to parse date, use python library - it's way too slow.
 - [ ] Displayed on a local HTML page (can download, view, etc.)
 
 ## Goal: Version 1
