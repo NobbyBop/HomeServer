@@ -1,15 +1,14 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse
+import os
+
 app = FastAPI()
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/{filename}", response_class=FileResponse)
+def serveImage(filename: str):
+    return os.path.join(os.environ.get("MEDIA_FOLDER", "/media/"), filename)
+        
+
+@app.get("/", response_class=FileResponse)
 def root():
-    return """<!DOCTYPE html>
-<html>
-    <head>
-        <title>Media Library</title>
-    </head>
-    <body>
-        <h1>Media Library</h1>
-    </body>
-</html>"""
+    return "index.html"

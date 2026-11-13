@@ -77,7 +77,7 @@ def ingest_folder_recursive():
 
                 cur["_id"] = new_id
                 cur["path"] = new_path
-                cur["filename"] = item
+                cur["filename"] = new_id+"."+ext
                 cur["type"] = "video" if ext.lower() == "mp4" else "photo"
                 cur["date"] = date
                 
