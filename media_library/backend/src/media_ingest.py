@@ -4,6 +4,9 @@ import os
 import re
 from .db import getCollection
 from uuid import uuid4
+import ffmpeg
+from PIL import Image
+import shutil
 
 def _contains(word: str, substrings: list[str]):
     for sub in substrings:
@@ -42,31 +45,35 @@ def ingest_folder_recursive():
                 ext =  item[extIdx+1:]
                 cur = {}
                 item_path = os.path.join(media_dir, item)
-                with open(item_path, 'rb') as load_item:
-                    content = load_item.read()
-                    if ext == "mp4":
-                        match = re.search(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})", str(content))
-                    else:
-                        match = re.search(r"(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})", str(content))
+                if ext.lower() == "mp4":
+                    try:
+                        datestr = ffmpeg.probe(item_path)["format"]["tags"]["creation_time"]
+                        match = re.search(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})", str(datestr))
+                    except:
+                        match = None
+                else:
+                    img = Image.open(item_path)
+                    # 0x0132 is the well-known tag for DateTime
+                    datestr = img.getexif().get(0x0132, "N/A")
+                    match = re.search(r"(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})", str(datestr))
+                    
+                if not match:
+                    date = None
+                else:
+                    date = {
+                        "year":int(match.group(1)),
+                        "month":int(match.group(2)),
+                        "day":int(match.group(3)),
+                        "hour":int(match.group(4)),
+                        "minute":int(match.group(5)),
+                        "second":int(match.group(6))
+                    }
 
-                    if not match:
-                        date = None
-                    else:
-                        date = {
-                            "year":int(match.group(1)),
-                            "month":int(match.group(2)),
-                            "day":int(match.group(3)),
-                            "hour":int(match.group(4)),
-                            "minute":int(match.group(5)),
-                            "second":int(match.group(6))
-                        }
+                new_id = str(uuid4())
+                new_path = os.path.join(new_folder, new_id+"."+ext)
 
-                    new_id = str(uuid4())
-
-                    new_path = os.path.join(new_folder, new_id+"."+ext)
-                    # Copy the ingested file into a the managed media folder with filename = id
-                    with open(new_path, 'wb') as copy:
-                        copy.write(content)
+                # Copy the ingested file into a the managed media folder with filename = id
+                shutil.copy(item_path, new_path)
 
                 cur["_id"] = new_id
                 cur["path"] = new_path
@@ -78,9 +85,32 @@ def ingest_folder_recursive():
                 if filename_minus_ext+".MOV" in live_photos:
                     live_id = str(uuid4())
                     live_path = os.path.join(new_folder, live_id+".MOV")
+
                     # Copy the live photo to the media folder.
-                    with open(live_path, 'wb') as copy:
-                        copy.write(content)
+                    shutil.copy(os.path.join(media_dir, filename_minus_ext+".MOV"), live_path)
+                    
                     cur["live"] = os.path.join(new_folder, str(live_id)+".MOV")
 
                 col.insert_one(cur)
+
+"""
+Reference
+---
+
+from PIL import Image
+import ffmpeg
+
+# Getting date from MP4
+mp4 = "C:\\Users\\nicho\\Desktop\\media\\1518673c-dddc-4335-9d2b-710cb56eecc1.MP4"
+
+probedata = ffmpeg.probe(mp4)
+print(probedata["format"]["tags"]["creation_time"])
+
+# Getting date from image.
+jpeg = Image.open("C:\\Users\\nicho\\Desktop\\media\\00a50aee-f30d-4ffb-b71f-1299760f2f3e.JPEG")
+
+exif_data = jpeg.getexif()
+
+# 0x0132 is the well-known tag for DateTime
+print("Date Taken:", exif_data.get(0x0132, "N/A"))
+"""
