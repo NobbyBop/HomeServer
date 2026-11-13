@@ -19,7 +19,7 @@ def compare(media_a: dict, media_b: dict) :
         return 0
 
     if a is not None and b is not None:
-        for attr in ["year", "month", "hour", "minute", "second"]:
+        for attr in ["year", "month", "day", "hour", "minute", "second"]:
             if a[attr] > b[attr]:
                 return -1
             if a[attr] < b[attr]:
@@ -38,8 +38,10 @@ def root(year: int = 0, month: int = 0, day: int = 0, type: str = "all"):
     if type != "all":
         query.append({"type": type})
 
-    media = list(col.find({"$and": query}))
+    media = list(col.find({"$and": query} if query != [] else {}))
+
     media = sorted(media, key=cmp_to_key(compare))
+
     return media
 
 @app.post("/rescan")
