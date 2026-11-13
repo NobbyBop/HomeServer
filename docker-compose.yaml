@@ -19,4 +19,17 @@ services:
             - "C:\\Users\\nicho\\Desktop\\ingest\\:/ingest/"
         depends_on:
             - media_mongo
+    
+    media_frontend:
+        build: ./media_library/frontend/
+        ports:
+            - 8001:8001
+        environment:
+            BACKEND_URL: "media_backend"
+            MEDIA_FOLDER: "/media/"
+        volumes:
+            - "C:\\Users\\nicho\\Desktop\\media\\:/media/"
+        depends_on:
+            - media_mongo
+            - media_backend
         

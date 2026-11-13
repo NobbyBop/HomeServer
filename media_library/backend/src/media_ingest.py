@@ -78,7 +78,7 @@ def ingest_folder_recursive():
                 cur["_id"] = new_id
                 cur["path"] = new_path
                 cur["filename"] = item
-                cur["type"] = "video" if ext == "mp4" else "photo"
+                cur["type"] = "video" if ext.lower() == "mp4" else "photo"
                 cur["date"] = date
                 
                 # Remove file extension and check if filename.MOV is in the live photo list.

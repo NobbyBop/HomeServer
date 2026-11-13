@@ -7,7 +7,7 @@ A first draft of this would look like:
 - [x] Parsed and sorted by date
 - [x] Use a database (MongoDB makes the most sense here), not a JSON file.
 - [x] Need to figure out how I will host images (in this container, outside? not sure what is best yet.)
-- [ ] Stop using regex to parse date, use python library - it's way too slow.
+- [x] Stop using regex to parse date, use python library - it's way too slow.
 - [ ] Displayed on a local HTML page (can download, view, etc.)
 
 ## Goal: Version 1
@@ -36,3 +36,11 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 		- I suspect that they are somehow interpreting the package differently, but I have no more bandwidth.
 		- It works in both Docker and Windows now, so I am not going to chase down the issue anymore.
 	- I don't even care about running it in Windows, but I want the `.venv` so that I get type checking on all the modules. 
+
+## 11/13/2026
+- Since my last update, I converted the date parsing to use `ffmpeg` and `PIL` for videos and images respectively.
+- I added basic querying to `GET /` via query params.
+- Now my only remaining step towards v0 is to make a frontend to serve the images and allow you to filter them!
+	- Frontend needs to serve all images from `MEDIA_FOLDER`.
+- Along the way I fixed some small bugs in the `media_ingest.py` file. 
+- Once I reach v0 I will want to add a way to do upload/delete, then I'll call it done at v1, and it will actually be a living photo album on my home server!
