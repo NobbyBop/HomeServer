@@ -1,0 +1,22 @@
+services:
+    media_mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes:
+            - "C:\\Users\\nicho\\Desktop\\data\\db:/data/db"
+
+    media_backend:
+        build: ./media_library/backend/
+        ports:
+            - 8000:8000
+        environment:
+            MONGO_CONNECT_URL: "mongodb://media_mongo:27017/"
+            INGEST_FOLDER: "/ingest/"
+            MEDIA_FOLDER: "/media/"
+        volumes:
+            - "C:\\Users\\nicho\\Desktop\\media\\:/media/"
+            - "C:\\Users\\nicho\\Desktop\\ingest\\:/ingest/"
+        depends_on:
+            - media_mongo
+        
