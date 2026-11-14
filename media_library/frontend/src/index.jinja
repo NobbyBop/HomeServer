@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Media Library</title>
+    </head>
+    <body>
+        <h1>Media Library</h1>
+        <ul>
+            <!-- {'_id': '3976e7e3-110e-4fd2-be7e-ea6300871a42', 
+             'path': '/media/3976e7e3-110e-4fd2-be7e-ea6300871a42.JPEG', 
+             'filename': 'IMG_7105.JPEG', 
+             'type': 'photo', 
+             'date': {'year': 2025, 'month': 7, 'day': 9, 'hour': 18, 'minute': 14, 'second': 32}} -->
+            {% for item in data %}
+            <li><img src="{{ item.path }}"/></li>
+            {% endfor %}
+        </ul>
+    </body>
+    <style>
+        img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+    </style>
+</html>
