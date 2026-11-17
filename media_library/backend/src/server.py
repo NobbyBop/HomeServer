@@ -27,7 +27,7 @@ def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page:int
     if typ != "all":
         filters.append({"type": typ})
 
-    page_size = 50
+    page_size = 48
     skip = page_size * int(page)
 
     query = {"$and": filters} if filters != [] else {}

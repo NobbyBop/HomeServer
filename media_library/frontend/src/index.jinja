@@ -28,81 +28,130 @@
             {% endif %}
         </select>
 
-        <label for="year_input">Year</label>
-        <input id="year_input" value="{{ year }}"/>
-        <label for="month_input">Month</label>
-        <input id="month_input" value="{{ month }}"/>
-        <label for="day_input">Day</label>
-        <input id = "day_input" value="{{ day }}"/>
-        <button id="filter_button" onclick="filter()">Filter</button>
-
-        <br/>
-
-        <button id="pageLeft" onclick="pageLeft()">&lt</button>
-        <span id="page">{{ page }} / {{ (count // 50)|round(0, 'ceil') }}</span>
-        <button id="pageLeft" onclick="pageRight()">&gt</button>
-
-        {% for item in data %}
-        <div>
-            {% if item.type == 'photo' %}
-                <img src="{{ item.path }}"/>
-            {% else %}
-                <video controls>
-                    <source src="{{ item.path }}" type="video/mp4">
-                </video>
-            {% endif %}
-            <p>{{item.date}}</p>
+        <div> 
+            <label for="year_input">Year</label>
+            <input id="year_input" value="{{ year }}"/>
+            <label for="month_input">Month</label>
+            <input id="month_input" value="{{ month }}"/>
+            <label for="day_input">Day</label>
+            <input id = "day_input" value="{{ day }}"/>
+            <button id="filter_button" onclick="filter()">Filter</button>
         </div>
-        {% endfor %}
 
-        <button id="pageLeft" onclick="pageLeft()">&lt</button>
-        <span id="page">{{ page }} / {{ (count // 50)|round(0, 'ceil') }}</span>
-        <button id="pageLeft" onclick="pageRight()">&gt</button>
+        <div>
+            <button id="pageLeft" onclick="pageLeft()">&lt</button>
+            <span id="page">{{ page }} / {{ (count // 48)|round(0, 'ceil') }}</span>
+            <button id="pageRight" onclick="pageRight()">&gt</button>
+        </div>
 
+        <div>
+            <button id="zoomIn" onclick="zoomIn()">+</button>
+            <button id="zoomOut" onclick="zoomOut()">-</button>
+        </div>
+
+        <div id="image_container">
+            {% for item in data %}
+            <div>
+                {% if item.type == 'photo' %}
+                    <img src="{{ item.path }}"/>
+                {% else %}
+                    <video controls>
+                        <source src="{{ item.path }}" type="video/mp4">
+                    </video>
+                {% endif %}
+                <p>{{item.date}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div>
+            <button id="pageLeft" onclick="pageLeft()">&lt</button>
+            <span id="page">{{ page }} / {{ (count // 48)|round(0, 'ceil') }}</span>
+            <button id="pageLeft" onclick="pageRight()">&gt</button>
+        </div>
+        
         <p hidden id="hidden_page">{{ page }}</p>
-        <p hidden id="hidden_max_page">{{ (count // 50)|round(0, 'ceil') }}</p>
+        <p hidden id="hidden_max_page">{{ (count // 48)|round(0, 'ceil') }}</p>
         <p hidden id="hidden_typ">{{ typ }}</p>
         <p hidden id="hidden_year">{{ year }}</p>
         <p hidden id="hidden_month">{{ month }}</p>
         <p hidden id="hidden_day">{{ day }}</p>
+        <p hidden id="hidden_zoom">{{ zoom }}</p>
 
     </body>
     <style>
 img {
-    max-width: 25%;
+    max-width: 100%;
 }
+
 video {
-    max-width: 25%;
+    max-width: 100%;
+}
+
+#image_container {
+    display: grid;
+    align-items: center;
+    gap: 1%
 }
     </style>
     <script>
 function getJinjaVariables() {
-    page =  Number.parseInt(document.getElementById("hidden_page").textContent)
-    max_page = Number.parseInt(document.getElementById("hidden_max_page").textContent)
-    typ =  document.getElementById("hidden_typ").textContent
-    year = Number.parseInt(document.getElementById("hidden_year").textContent)
-    month = Number.parseInt(document.getElementById("hidden_month").textContent)
-    day = Number.parseInt(document.getElementById("hidden_day").textContent)
-    return {page, typ, year, month, day, max_page}
+    let page =  Number.parseInt(document.getElementById("hidden_page").textContent)
+    let max_page = Number.parseInt(document.getElementById("hidden_max_page").textContent)
+    let typ =  document.getElementById("hidden_typ").textContent
+    let year = Number.parseInt(document.getElementById("hidden_year").textContent)
+    let month = Number.parseInt(document.getElementById("hidden_month").textContent)
+    let day = Number.parseInt(document.getElementById("hidden_day").textContent)
+    let zoom = Number.parseInt(document.getElementById("hidden_zoom").textContent)
+    return {page, typ, year, month, day, max_page, zoom}
 }
 
 function pageLeft() {
-    vars = getJinjaVariables()
-    if (page > 0) window.location.href = `/?page=${vars.page - 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}`
+    let vars = getJinjaVariables()
+    if (vars.page > 0) {
+        window.location.href = `/?page=${vars.page - 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}&zoom=${vars.zoom}`
+    }
 }
 
 function pageRight() {
-    vars = getJinjaVariables()
-    if (page < vars.max_page) window.location.href = `/?page=${vars.page + 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}`
+    let vars = getJinjaVariables()
+    if (vars.page < vars.max_page){
+        window.location.href = `/?page=${vars.page + 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}&zoom=${vars.zoom}`
+    }
 }
 
 function filter() {
-    typ = document.getElementById("type_input").value
-    year = Number.parseInt(document.getElementById("year_input").value)
-    month = Number.parseInt(document.getElementById("month_input").value)
-    day = Number.parseInt(document.getElementById("year_input").value)
+    let vars = getJinjaVariables()
 
-    window.location.href = `/?page=0&typ=${typ}&year=${year}&month=${month}&day=${day}`
+    let typ = document.getElementById("type_input").value
+    let year = Number.parseInt(document.getElementById("year_input").value)
+    let month = Number.parseInt(document.getElementById("month_input").value)
+    let day = Number.parseInt(document.getElementById("year_input").value)
+
+    window.location.href = `/?page=0&typ=${typ}&year=${year}&month=${month}&day=${day}&zoom=${vars.zoom}`
 }
+
+function zoomIn() {
+    let vars = getJinjaVariables()
+    if (vars.zoom > 1) { 
+        document.getElementById("image_container").style.gridTemplateColumns = "1fr ".repeat(vars.zoom - 1)
+        document.getElementById("hidden_zoom").textContent = String(vars.zoom - 1) 
+    }
+}
+
+function zoomOut() {
+    let vars = getJinjaVariables()
+    if (vars.zoom < 5) { 
+        document.getElementById("image_container").style.gridTemplateColumns = "1fr ".repeat(vars.zoom + 1)
+        document.getElementById("hidden_zoom").textContent = String(vars.zoom + 1) 
+    }
+}
+
+function startUp() {
+    let vars = getJinjaVariables()
+    document.getElementById("image_container").style.gridTemplateColumns = "1fr ".repeat(vars.zoom) 
+}
+startUp()
+
     </script>
 </html>

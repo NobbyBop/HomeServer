@@ -11,7 +11,7 @@ A first draft of this would look like:
 - [x] Displayed on a local HTML page (can download, view, etc.)
 	- [x] Paginated results are needed (I think from backend would be ideal.) Default 50.
 	- [x] Forgot I need to render videos somehow LOL
-- [ ] Make it look nice!
+- [x] Make it look nice!
 
 ## Goal: Version 1
 Beyond viewing, I want to add upload support so I can upload files from any device (it will likely be coming from my phone, not my computer).
@@ -57,3 +57,7 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 - I've been having a really good time with this, it is nice to be working on a project over a little loner period of time, with a clear end goal in mind.
 - During my next session I will focus on a more robust UI and just trying to make it a bit more error resistant and presentable.
 	- I'll limit that to one session because I do want to implement the version 1 things like upload and delete so I can actually start using this.
+
+## 11/17/2026
+- Made images appear in a grid, and added zoom functionality to adjust the number of columns.
+- This is definitely good enough for now and I can refine more once the rest of the functionality is done!
