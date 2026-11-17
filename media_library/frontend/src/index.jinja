@@ -5,21 +5,73 @@
     </head>
     <body>
         <h1>Media Library</h1>
-        <ul>
-            <!-- {'_id': '3976e7e3-110e-4fd2-be7e-ea6300871a42', 
-             'path': '/media/3976e7e3-110e-4fd2-be7e-ea6300871a42.JPEG', 
-             'filename': 'IMG_7105.JPEG', 
-             'type': 'photo', 
-             'date': {'year': 2025, 'month': 7, 'day': 9, 'hour': 18, 'minute': 14, 'second': 32}} -->
-            {% for item in data %}
-            <li><img src="{{ item.path }}"/></li>
-            {% endfor %}
-        </ul>
+        <label for="type">Type</label>
+        <select id="type">
+            {% if typ == 'all' %}
+                <option value="all" selected>All</option>
+            {% else %}
+                <option value="all">All</option>
+            {% endif %}
+
+            {% if typ == 'photo' %}
+                <option value="photo" selected>Photo</option>
+            {% else %}
+                <option value="photo">Photo</option>
+            {% endif %}
+
+            {% if typ == 'video' %}
+                <option value="video" selected>Video</option>
+            {% else %}
+                <option value="video">Video</option>
+            {% endif %}
+        </select>
+        <label for="year">Year</label>
+        <input id="year" value="{{ year }}"/>
+        <label for="month">Month</label>
+        <input id="month" value="{{ month }}"/>
+        <label for="day">Day</label>
+        <input id = "day" value="{{ day }}"/>
+        <br/>
+        <button id="pageLeft" onclick="pageLeft()">&lt</button>
+        <span id="page">{{ page }} / {{ (count // 50)|round(0, 'ceil') }}</span>
+        <button id="pageLeft" onclick="pageRight()">&gt</button>
+
+        {% for item in data %}
+        <div>
+            <img src="{{ item.path }}"/>
+            <p>{{item.date}}</p>
+        </div>
+        {% endfor %}
+
+        <p hidden id="hidden_page">{{ page }}</p>
+        <p hidden id="hidden_max_page">{{ (count // 50)|round(0, 'ceil') }}</p>
+        <p hidden id="hidden_typ">{{ typ }}</p>
+        <p hidden id="hidden_year">{{ year }}</p>
+        <p hidden id="hidden_month">{{ month }}</p>
+        <p hidden id="hidden_day">{{ day }}</p>
     </body>
     <style>
-        img {
-            max-width: 50px;
-            max-height: 50px;
-        }
+img {
+    max-width: 25%;
+}
     </style>
+    <script>
+function getVariables() {
+    page =  Number.parseInt(document.getElementById("hidden_page").textContent)
+    max_page = Number.parseInt(document.getElementById("hidden_max_page").textContent)
+    typ =  document.getElementById("hidden_typ").textContent
+    year = Number.parseInt(document.getElementById("hidden_year").textContent)
+    month = Number.parseInt(document.getElementById("hidden_month").textContent)
+    day = Number.parseInt(document.getElementById("hidden_day").textContent)
+    return {page, typ, year, month, day, max_page}
+}
+function pageLeft() {
+    vars = getVariables()
+    if (page > 0) window.location.href = `/?page=${vars.page - 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}`
+}
+function pageRight() {
+    vars = getVariables()
+    if (page < vars.max_page) window.location.href = `/?page=${vars.page + 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}`
+}
+    </script>
 </html>

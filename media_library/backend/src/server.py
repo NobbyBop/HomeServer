@@ -6,43 +6,37 @@ from .db import getCollection
 col = getCollection()
 app = FastAPI()
 
-# Custom comparitor for sorting the media documents by date.
-def compare(media_a: dict, media_b: dict) :
-    a: dict | None = media_a["date"]
-    b: dict | None = media_b["date"]
-    
-    if a is None and b is not None:
-        return -1
-    if a is not None and b is None:
-        return 1
-    if a is None and b is None:
-        return 0
-
-    if a is not None and b is not None:
-        for attr in ["year", "month", "day", "hour", "minute", "second"]:
-            if a[attr] > b[attr]:
-                return -1
-            if a[attr] < b[attr]:
-                return 1
-    return 0
+SORT_QUERY={
+    "date.year": 1,
+    "date.month": 1,
+    "date.day": 1,
+    "date.hour": 1,
+    "date.minute": 1,
+    "date.second": 1
+}
 
 @app.get("/")
-def root(year: int = 0, month: int = 0, day: int = 0, type: str = "all"):
-    query = []
+def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page:int = 0):
+    filters = []
     if year != 0:
-        query.append({"date.year": int(year)})
+        filters.append({"date.year": int(year)})
     if month != 0:
-        query.append({"date.month": int(month)})
+        filters.append({"date.month": int(month)})
     if day != 0:
-        query.append({"date.day": int(day)})
-    if type != "all":
-        query.append({"type": type})
+        filters.append({"date.day": int(day)})
+    if typ != "all":
+        filters.append({"type": typ})
 
-    media = list(col.find({"$and": query} if query != [] else {}))
+    page_size = 50
+    skip = page_size * int(page)
 
-    media = sorted(media, key=cmp_to_key(compare))
+    query = {"$and": filters} if filters != [] else {}
+    count = col.count_documents(query)
+    media = list(col.find(query, sort=SORT_QUERY).skip(skip).limit(page_size))
 
-    return media
+    data = {"media": media, "count": count}
+
+    return data
 
 @app.post("/rescan")
 def rescan():

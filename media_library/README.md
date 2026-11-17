@@ -9,9 +9,12 @@ A first draft of this would look like:
 - [x] Need to figure out how I will host images (in this container, outside? not sure what is best yet.)
 - [x] Stop using regex to parse date, use python library - it's way too slow.
 - [ ] Displayed on a local HTML page (can download, view, etc.)
+	- [x] Paginated results are needed (I think from backend would be ideal.) Default 50.
+	- [ ] Forgot I need to render videos somehow LOL
 
 ## Goal: Version 1
 Beyond viewing, I want to add upload support so I can upload files from any device (it will likely be coming from my phone, not my computer).
+- [ ] When ingesting, put media into folders like `YYYY/MM/` or `Undated`
 
 ## Field Notes
 
