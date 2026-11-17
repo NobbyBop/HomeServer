@@ -8,13 +8,15 @@ A first draft of this would look like:
 - [x] Use a database (MongoDB makes the most sense here), not a JSON file.
 - [x] Need to figure out how I will host images (in this container, outside? not sure what is best yet.)
 - [x] Stop using regex to parse date, use python library - it's way too slow.
-- [ ] Displayed on a local HTML page (can download, view, etc.)
+- [x] Displayed on a local HTML page (can download, view, etc.)
 	- [x] Paginated results are needed (I think from backend would be ideal.) Default 50.
-	- [ ] Forgot I need to render videos somehow LOL
+	- [x] Forgot I need to render videos somehow LOL
+- [ ] Make it look nice!
 
 ## Goal: Version 1
 Beyond viewing, I want to add upload support so I can upload files from any device (it will likely be coming from my phone, not my computer).
 - [ ] When ingesting, put media into folders like `YYYY/MM/` or `Undated`
+- [ ] Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...
 
 ## Field Notes
 
@@ -47,3 +49,11 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 	- Frontend needs to serve all images from `MEDIA_FOLDER`.
 - Along the way I fixed some small bugs in the `media_ingest.py` file. 
 - Once I reach v0 I will want to add a way to do upload/delete, then I'll call it done at v1, and it will actually be a living photo album on my home server!
+
+## 11/16/2026
+- Ok so I guess I am technically done with v0, except it still looks really ugly haha.
+- I implmented pagination, filtering on the frontend, and video players today. Big success!
+	- At this point the website is actually usable for searching through my photos and videos which is really cool.
+- I've been having a really good time with this, it is nice to be working on a project over a little loner period of time, with a clear end goal in mind.
+- During my next session I will focus on a more robust UI and just trying to make it a bit more error resistant and presentable.
+	- I'll limit that to one session because I do want to implement the version 1 things like upload and delete so I can actually start using this.
