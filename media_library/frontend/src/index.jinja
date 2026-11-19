@@ -7,26 +7,34 @@
 
         <h1>Media Library</h1>
 
-        <label for="type_input">Type</label>
-        <select id="type_input">
-            {% if typ == 'all' %}
-                <option value="all" selected>All</option>
-            {% else %}
-                <option value="all">All</option>
-            {% endif %}
+        <div>
+            <input id="file_input" type="file" multiple/>
+            <button onclick="upload()">Upload</button>
+            <p id="upload_message"></p>
+        </div>
 
-            {% if typ == 'photo' %}
-                <option value="photo" selected>Photo</option>
-            {% else %}
-                <option value="photo">Photo</option>
-            {% endif %}
+        <div>
+            <label for="type_input">Type</label>
+            <select id="type_input">
+                {% if typ == 'all' %}
+                    <option value="all" selected>All</option>
+                {% else %}
+                    <option value="all">All</option>
+                {% endif %}
 
-            {% if typ == 'video' %}
-                <option value="video" selected>Video</option>
-            {% else %}
-                <option value="video">Video</option>
-            {% endif %}
-        </select>
+                {% if typ == 'photo' %}
+                    <option value="photo" selected>Photo</option>
+                {% else %}
+                    <option value="photo">Photo</option>
+                {% endif %}
+
+                {% if typ == 'video' %}
+                    <option value="video" selected>Video</option>
+                {% else %}
+                    <option value="video">Video</option>
+                {% endif %}
+            </select>
+        </div>
 
         <div> 
             <label for="year_input">Year</label>
@@ -153,5 +161,23 @@ function startUp() {
 }
 startUp()
 
+function upload() {
+    files = document.getElementById("file_input").files
+    if (files.length == 0) {
+        document.getElementById("upload_message").textContent = "Error: You must select file(s)."
+    } else {
+        document.getElementById("file_input").value = null
+        document.getElementById("upload_message").textContent = "Your file(s) have been sent to the backend."
+        for(let file of files){
+            fetch("http://localhost:8001/", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: file
+            })
+        }
+    }
+}
     </script>
 </html>

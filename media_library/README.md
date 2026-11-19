@@ -61,3 +61,8 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 ## 11/17/2026
 - Made images appear in a grid, and added zoom functionality to adjust the number of columns.
 - This is definitely good enough for now and I can refine more once the rest of the functionality is done!
+
+## 11/18/2026
+- Began the work on file uploading.
+	- Currently having trouble bridging the gap between the browser and the frontend server with Files
+	- I keep running into `422 Unprocessable Content`. I think this is a FastAPI thing. I am wondering if I should have just done it in Javascript with express. But I will figure it out, just not tonight.

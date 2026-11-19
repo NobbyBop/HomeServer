@@ -41,3 +41,9 @@ def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: in
     output = template.render(data=media, count=count, page=page, year=year, month=month, day=day, typ=typ, zoom=zoom)
 
     return output
+
+from typing import Annotated
+from fastapi import UploadFile, File
+@app.post("/")
+async def upload(file: Annotated[bytes, File()]):
+    return {"file_size": len(file)}
