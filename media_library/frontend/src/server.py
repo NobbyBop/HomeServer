@@ -7,11 +7,11 @@ import os
 app = FastAPI()
      
 @app.get("/media/{filename}", response_class=FileResponse)
-def serveImage(filename: str):
+async def serveImage(filename: str):
     return f"/media/{filename}"
         
 @app.get("/", response_class=HTMLResponse)
-def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: int = 0, zoom: int = 3):
+async def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: int = 0, zoom: int = 3):
     queryCount = 0
     query = ""
     if year != 0:
@@ -42,8 +42,7 @@ def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: in
 
     return output
 
-from typing import Annotated
-from fastapi import UploadFile, File
-@app.post("/")
-async def upload(file: Annotated[bytes, File()]):
-    return {"file_size": len(file)}
+from fastapi import Request, UploadFile
+@app.post("/uploadfile/")
+async def create_upload_file(myfile: UploadFile):
+    return {"filename": myfile.filename}

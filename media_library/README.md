@@ -66,3 +66,84 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 - Began the work on file uploading.
 	- Currently having trouble bridging the gap between the browser and the frontend server with Files
 	- I keep running into `422 Unprocessable Content`. I think this is a FastAPI thing. I am wondering if I should have just done it in Javascript with express. But I will figure it out, just not tonight.
+
+## 11/19/2026
+- I spent probably an hour trying to figure this out, combing through Stack Overflow, and I ALMOST made the following post:
+"I have been trying to upload an image to a FastAPI server, unsuccessfully. I have already seen threads about this but the solutions haven't worked. I have read a bunch of similar threads and found that their solutions didn't work for me, although I am trying to stick as close to the docs as possible.Here is my current state:
+
+### Client-Side - referencing this thread
+
+```
+<div>
+    <input id="file_input" type="file" multiple/>
+    <button onclick="upload()">Upload</button>
+    <p id="upload_message"></p>
+</div>
+```
+```
+function upload() {
+    files = document.getElementById("file_input").files
+    console.log(files) // FileList[File] - I have verified this is the correct object
+    if (files.length == 0) {
+        document.getElementById("upload_message").textContent = "Error: You must select file(s)."
+    } else {
+        document.getElementById("file_input").value = null
+        document.getElementById("upload_message").textContent = "Your file(s) have been sent to the backend."
+        for(let file of files){
+            fetch("http://localhost:8001/uploadfile/", {
+                method: "POST",
+                // Have read here that Content-Type should be omitted.
+                body: file
+            })
+        }
+    }
+}
+```
+### Server - straight from FastAPI docs
+
+```
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    return {"filename": file.filename}
+```
+
+422 - Unprocessable Content
+
+### Other Things I Have Tried:
+
+```
+@app.post("/uploadfile/")
+async def create_upload_file(request: Request):
+    body = await request.body()
+    return body
+```
+This got me a bit closer - I am able to print the raw body, but decoding fails on return. I have also tried request.json() but that fails with a decoding error.
+
+```
+<form action="http://localhost:8001/uploadfile/", method="post">
+    <input id="file_input" type="file" multiple/>
+    <button type="submit">Upload</button>
+</form>
+```
+
+Tried sending it as form data as well but this also gave me 422 - Unprocessable Content.When I send as form data it says "No Request Data", when I send the File object as the body I do see the File contents as the request body but still get unprocessable data. I've tried with txt, jpg, pdf, all the same result.
+
+I've been checking the network tab to see how the files get sent, because I've also read I need to match the parameter name to the request.
+```
+fetch("http://localhost:8001/uploadfile/", {
+                method: "POST",
+                body: JSON.stringify({"myfile": file}) 
+            })
+```
+
+Also tried {myfile: file} directly, and of course matching that in the server parameter, still no luck although this gives me a 501.Would greatly appreciate a point in the right direction. Thanks!"
+- But! I actually got it to work with this:
+```
+let data = new FormData()
+data.append("myfile", files[0])
+fetch("http://localhost:8001/uploadfile/", {
+	method: "POST",
+	body: data
+})
+```
+- Which is stupid. I hate FastAPI. I wish I did not build with it. JavaScript express is so much better. But here we are.

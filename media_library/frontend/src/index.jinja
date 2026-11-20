@@ -7,6 +7,15 @@
 
         <h1>Media Library</h1>
 
+        http://localhost:8001/uploadfile/
+        
+        {# <div>
+            <form action="http://localhost:8001/uploadfile/", method="post", enctype="application/x-www-form-urlencoded">
+                <input id="file_input" type="file" multiple/>
+                <button type="submit">Upload</button>
+            </form>
+        </div> #}
+
         <div>
             <input id="file_input" type="file" multiple/>
             <button onclick="upload()">Upload</button>
@@ -88,6 +97,11 @@
 
     </body>
     <style>
+body {
+    background-color: black;
+    color: white;
+}
+
 img {
     max-width: 100%;
 }
@@ -162,21 +176,20 @@ function startUp() {
 startUp()
 
 function upload() {
-    files = document.getElementById("file_input").files
+    let files = document.getElementById("file_input").files
+    console.log(files) // FileList[File]
     if (files.length == 0) {
         document.getElementById("upload_message").textContent = "Error: You must select file(s)."
     } else {
         document.getElementById("file_input").value = null
         document.getElementById("upload_message").textContent = "Your file(s) have been sent to the backend."
-        for(let file of files){
-            fetch("http://localhost:8001/", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: file
-            })
-        }
+        let data = new FormData()
+        data.append("myfile", files[0])
+        fetch("http://localhost:8001/uploadfile/", {
+            method: "POST",
+            body: data
+        })
+        
     }
 }
     </script>
