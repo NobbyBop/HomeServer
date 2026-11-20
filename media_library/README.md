@@ -15,7 +15,10 @@ A first draft of this would look like:
 
 ## Goal: Version 1
 Beyond viewing, I want to add upload support so I can upload files from any device (it will likely be coming from my phone, not my computer).
+- [x] Upload support
+    - [ ] Support large quantities of files at once.
 - [ ] When ingesting, put media into folders like `YYYY/MM/` or `Undated`
+    - [ ] Also, need to delete the ingest folder once it is uploaded to the media folder.
 - [ ] Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...
 
 ## Field Notes
@@ -147,3 +150,9 @@ fetch("http://localhost:8001/uploadfile/", {
 })
 ```
 - Which is stupid. I hate FastAPI. I wish I did not build with it. JavaScript express is so much better. But here we are.
+
+## 11/20/2026
+- I got the file uploads to work (mostly, they seem to hang when you do too many. I think it might be a browser limitation, but can't confirm for sure yet.)
+- I also decided it was not really necessary to separate the frontend and backend because it is one simple DB request, and everything is running on my local machine anyway.
+    - Now all the behavior is in one place, it is easier to iterate and change. Fewer docker services, less overhead on calls.
+    - Obviously this is not a great standard, but mongo DB is basically the backend in and of itself, so I am fine with this.
