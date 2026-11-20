@@ -11,4 +11,4 @@ COPY src .
 
 EXPOSE 8000
 
-CMD ["fastapi", "run", "server.py"]
+CMD ["fastapi", "run", "server.py", "--port", "8000"]

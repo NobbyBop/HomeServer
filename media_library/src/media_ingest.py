@@ -15,8 +15,10 @@ def _contains(word: str, substrings: list[str]):
     return False
 
 def ingest_folder_recursive():
+    INGEST_FOLDER = os.environ["INGEST_FOLDER"]
+    MEDIA_FOLDER = os.environ["MEDIA_FOLDER"]
     found = []
-    directories = [os.environ.get("INGEST_FOLDER", "C:\\Users\\nicho\\Desktop\\ingest\\")]
+    directories = [INGEST_FOLDER]
     while len(directories) > 0: 
         current_dir = directories.pop()
         found.append(current_dir)
@@ -29,7 +31,7 @@ def ingest_folder_recursive():
     PHOTO_EXTS : list[str] = [".jpg",".jpeg",".gif",".png"]
 
     col = getCollection()
-    new_folder = os.environ.get("MEDIA_FOLDER", "C:\\Users\\nicho\\Desktop\\media")
+    new_folder = MEDIA_FOLDER
 
     for media_dir in found:
         print(f"Scanning: {media_dir}") 
