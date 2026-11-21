@@ -16,9 +16,9 @@ A first draft of this would look like:
 ## Goal: Version 1
 Beyond viewing, I want to add upload support so I can upload files from any device (it will likely be coming from my phone, not my computer).
 - [x] Upload support
-    - [ ] Support large quantities of files at once.
+    - [ ] Support large quantities of files at once. (Looks like I will need to do streaming for this. Possibly one stream per file and then close the stream, or stream all the files at once until they are done.)
 - [ ] When ingesting, put media into folders like `YYYY/MM/` or `Undated`
-    - [ ] Also, need to delete the ingest folder once it is uploaded to the media folder.
+    - [x] Also, need to delete the ingest folder once it is uploaded to the media folder.
 - [ ] Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...
 
 ## Field Notes
