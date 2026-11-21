@@ -71,12 +71,6 @@
             </div>
             {% endfor %}
         </div>
-
-        <div>
-            <button id="pageLeft" onclick="pageLeft()">&lt</button>
-            <span id="page">{{ page }} / {{ (count // 48)|round(0, 'ceil') }}</span>
-            <button id="pageLeft" onclick="pageRight()">&gt</button>
-        </div>
         
         <p hidden id="hidden_page">{{ page }}</p>
         <p hidden id="hidden_max_page">{{ (count // 48)|round(0, 'ceil') }}</p>

@@ -58,7 +58,10 @@ async def create_upload_file(myfile: UploadFile):
 
 @app.post("/ingest")
 def ingest():
+    INGEST_FOLDER = os.environ["INGEST_FOLDER"]
     ingest_folder_recursive()
+    for file in os.listdir(INGEST_FOLDER):
+        os.remove(os.path.join(INGEST_FOLDER, file))
     return {"success": True}
 
 @app.post("/drop")
