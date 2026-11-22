@@ -31,23 +31,26 @@ def ingest_folder_recursive():
     PHOTO_EXTS : list[str] = [".jpg",".jpeg",".gif",".png"]
 
     col = getCollection()
-    new_folder = MEDIA_FOLDER
 
     for media_dir in found:
         print(f"Scanning: {media_dir}") 
         files: list[str] = os.listdir(media_dir)
         photos: list[str] = list(filter(lambda x: _contains(x.lower(), PHOTO_EXTS), files))
-        live_photos: list[str] = list(filter(lambda x: x.lower().endswith(".mov"), files))
+        dot_mov_files: list[str] = list(filter(lambda x: x.lower().endswith(".mov"), files))
         videos: list[str] = list(filter(lambda x: x.lower().endswith(".mp4"), files))
 
-        for media in [photos, videos]:
+        # Note: dot_mov_files will contain live photos, so link and move live photos before other .mov files
+        for media in [photos, videos, dot_mov_files]:
+            if ".MOV" in media[0]:
+                print(media)
             for item in media:
                 extIdx = item.rindex(".")
                 filename_minus_ext = item[:extIdx]
                 ext =  item[extIdx+1:]
+                ext_lower = ext.lower()
                 cur = {}
                 item_path = os.path.join(media_dir, item)
-                if ext.lower() == "mp4":
+                if ext_lower == "mp4" or ext_lower == "mov":
                     try:
                         datestr = ffmpeg.probe(item_path)["format"]["tags"]["creation_time"]
                         match = re.search(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})", str(datestr))
@@ -72,7 +75,7 @@ def ingest_folder_recursive():
                     }
 
                 new_id = str(uuid4())
-                new_path = os.path.join(new_folder, new_id+"."+ext)
+                new_path = os.path.join(MEDIA_FOLDER, new_id+"."+ext)
 
                 # Move the ingested file into a the managed media folder with filename = id
                 shutil.move(item_path, new_path)
@@ -80,21 +83,31 @@ def ingest_folder_recursive():
                 cur["_id"] = new_id
                 cur["path"] = new_path
                 cur["filename"] = new_id+"."+ext
-                cur["type"] = "video" if ext.lower() == "mp4" else "photo"
+                cur["type"] = "video" if (ext_lower == "mp4" or ext_lower == "mov") else "photo"
                 cur["date"] = date
+                cur["ext"] = ext_lower
                 
                 # Remove file extension and check if filename.MOV is in the live photo list.
-                if filename_minus_ext+".MOV" in live_photos:
+
+                if ext_lower != "mov" and (filename_minus_ext+".MOV" in dot_mov_files or filename_minus_ext+".mov" in dot_mov_files):
+                    if filename_minus_ext+".MOV" in dot_mov_files:
+                        live_ext = "MOV"
+                    else:
+                        live_ext = "mov"
+
+                    # remove it from being processed again later.
+                    dot_mov_files.remove(filename_minus_ext+f".{live_ext}")
                     live_id = str(uuid4())
-                    live_path = os.path.join(new_folder, live_id+".MOV")
+                    live_path = os.path.join(MEDIA_FOLDER, live_id+f".{live_ext}")
 
                     # Copy the live photo to the media folder.
                     try:
-                        shutil.move(os.path.join(media_dir, filename_minus_ext+".MOV"), live_path)
+                        shutil.move(os.path.join(media_dir, filename_minus_ext+f".{live_ext}"), live_path)
                     except FileNotFoundError:
-                        print(f"Warning: Duplicate image names, already assigned live photo '{filename_minus_ext+".MOV"}' to another image.")
+                        print(f"Warning: Duplicate image names, already assigned live photo '{filename_minus_ext+f".{live_ext}"}' to another image.")
                     
-                    cur["live"] = os.path.join(new_folder, str(live_id)+".MOV")
+                    cur["live"] = os.path.join(MEDIA_FOLDER, str(live_id)+f".{live_ext}")
+                    cur["live_ext"] = live_ext
 
                 col.insert_one(cur)
 

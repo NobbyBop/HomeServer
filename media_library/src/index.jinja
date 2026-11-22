@@ -13,6 +13,8 @@
             <p id="upload_message"></p>
         </div>
 
+        <div><button onclick="deleteEverything()">Delete Everything</button></div>
+
         <div>
             <label for="type_input">Type</label>
             <select id="type_input">
@@ -67,7 +69,11 @@
                         <source src="{{ item.path }}" type="video/mp4">
                     </video>
                 {% endif %}
-                <p>{{item.date}}</p>
+                {% if item.date %}
+                    <p>{{ item.date.month }}-{{ item.date.day }}-{{ item.date.year }}</p>
+                {% else %}
+                    <p>Undated</p>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -182,5 +188,12 @@ async function upload() {
         document.getElementById("upload_message").textContent = "Successfully uploaded! Refresh the page to see them."
     }
 }
+
+async function deleteEverything() {
+    let _resp = await fetch("/drop/", {
+        method: "POST"
+    })
+}
+
     </script>
 </html>

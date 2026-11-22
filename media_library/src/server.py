@@ -1,13 +1,12 @@
 from fastapi import FastAPI, UploadFile, Request
-from typing import BinaryIO
+from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, HTMLResponse
-from jinja2 import Environment, FileSystemLoader
 from .media_ingest import ingest_folder_recursive
 from .db import getCollection
 import os
-import json
 
 app = FastAPI()
+templates = Jinja2Templates(".")
 col = getCollection()
 
 @app.get("/media/{filename}", response_class=FileResponse)
@@ -24,7 +23,7 @@ SORT_QUERY={
 }
 
 @app.get("/", response_class=HTMLResponse)
-async def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: int = 0, zoom: int = 3):
+async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: int = 0, zoom: int = 3):
     filters = []
     if year != 0:
         filters.append({"date.year": int(year)})
@@ -42,11 +41,11 @@ async def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", pa
     count = col.count_documents(query)
     media = list(col.find(query, sort=SORT_QUERY).skip(skip).limit(page_size))
 
-    env = Environment(loader=FileSystemLoader("."))
-    template = env.get_template("index.jinja")
-    output = template.render(data=media, count=count, page=page, year=year, month=month, day=day, typ=typ, zoom=zoom)
-
-    return output
+    return templates.TemplateResponse(
+        request=request, 
+        name="index.jinja", 
+        context={"data":media, "count":count, "page":page, "year":year, "month":month, "day":day, "typ":typ, "zoom":zoom}
+    )
 
 @app.post("/uploadfile/")
 async def upload_file(myfile: UploadFile):
@@ -69,5 +68,15 @@ def ingest():
 
 @app.post("/drop")
 def drop():
+    MEDIA_FOLDER = os.environ["MEDIA_FOLDER"]
+    INGEST_FOLDER = os.environ["INGEST_FOLDER"]
+
+    for file in os.listdir(INGEST_FOLDER):
+        os.remove(os.path.join(INGEST_FOLDER, file))
+
+    for file in os.listdir(MEDIA_FOLDER):
+        os.remove(os.path.join(MEDIA_FOLDER, file))
+
     col.drop()
+
     return {"success": True}
