@@ -18,11 +18,15 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 - [x] Upload support
     - [x] Support large quantities of files at once. (Looks like I will need to do streaming for this. Possibly one stream per file and then close the stream, or stream all the files at once until they are done.) (EDIT: Did not need streaming)
 - [ ] Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...
-- [ ] ~~When ingesting, put media into folders like `YYYY/MM/` or `Undated`~~
     - [x] Also, need to delete the ingest folder once it is uploaded to the media folder.
+- [ ] Implement delete and download (nice to have on mobile)
+- [ ] UX Overhaul - make it look profesh
+
+## Goal: Post-Release
 - [ ] Adding resiliency to the system
     - [ ] If the uploads fail, it would be better to reject because then you wouldn't know what files are duplicates.
     - [ ] If ingestion fails, you still have a bunch of files in the ingest folder that can probably be ingested...?
+- [ ] ~~When ingesting, put media into folders like `YYYY/MM/` or `Undated`~~
 
 ## Field Notes
 
