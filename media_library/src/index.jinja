@@ -9,7 +9,7 @@
 
         <div>
             <input id="file_input" type="file" multiple/>
-            <button onclick="upload()">Upload</button>
+            <button id="upload_button" onclick="upload()">Upload</button>
             <p id="upload_message"></p>
         </div>
 
@@ -74,6 +74,8 @@
                 {% else %}
                     <p>Undated</p>
                 {% endif %}
+                <button id="{{ item.path }}" onclick="deleteThis(this.id)">Delete</button>
+                <a href="{{ item.path }}" download>Download</a>
             </div>
             {% endfor %}
         </div>
@@ -108,6 +110,15 @@ video {
 }
     </style>
     <script>
+async function log(msg) {
+    let _resp = await fetch("/log/", {
+        method: "POST",
+        body: JSON.stringify({
+            msg: msg
+        })
+    })
+}
+
 function getJinjaVariables() {
     let page =  Number.parseInt(document.getElementById("hidden_page").textContent)
     let max_page = Number.parseInt(document.getElementById("hidden_max_page").textContent)
@@ -167,11 +178,11 @@ function startUp() {
 startUp()
 
 async function upload() {
+    document.getElementById("upload_button").setAttribute("disabled", "true")
     let files = document.getElementById("file_input").files
-    if (files.length == 0) {
+    if (files.length <= 0) {
         document.getElementById("upload_message").textContent = "Error: You must select file(s)."
     } else {
-        document.getElementById("file_input").value = null
         document.getElementById("upload_message").textContent = "Collecting..."
         for(let file of files) {
             let data = new FormData()
@@ -187,13 +198,26 @@ async function upload() {
         })
         document.getElementById("upload_message").textContent = "Successfully uploaded! Refresh the page to see them."
     }
+    document.getElementById("file_input").value = null
+    document.getElementById("upload_button").removeAttribute("disabled")
+}
+
+async function deleteThis(id) {
+    let button = document.getElementById(id)
+    button.setAttribute("disabled", "true")
+    let _resp = await fetch("/delete/", {
+        method: "POST",
+        body: JSON.stringify({
+            path: id
+        })
+    })
 }
 
 async function deleteEverything() {
     let _resp = await fetch("/drop/", {
         method: "POST"
     })
+    window.location.reload()
 }
-
     </script>
 </html>

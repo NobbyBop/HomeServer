@@ -9,6 +9,11 @@ app = FastAPI()
 templates = Jinja2Templates(".")
 col = getCollection()
 
+SUCCESS = {"success": True}
+
+def ERROR(msg):
+    return {"error": msg}
+
 @app.get("/media/{filename}", response_class=FileResponse)
 async def serveImage(filename: str):
     return f"/media/{filename}"
@@ -51,23 +56,24 @@ async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, ty
 async def upload_file(myfile: UploadFile):
     INGEST_FOLDER = os.environ["INGEST_FOLDER"]
     if myfile.filename:
+        print(f"Got file: {myfile.filename}")
         destination = os.path.join(INGEST_FOLDER, myfile.filename)
         with open(destination, 'wb+') as saveFile:
             saveFile.write(myfile.file.read())
         return {"success":True}
-    return {"error": "No filename."}
+    return ERROR("No filename.")
 
 @app.post("/ingest")
-def ingest():
+async def ingest():
     INGEST_FOLDER = os.environ["INGEST_FOLDER"]
     try:
         ingest_folder_recursive()
     except:
-        return {"error": "Upload failed."}
-    return {"success": True}
+        return ERROR("Upload failed")
+    return SUCCESS
 
 @app.post("/drop")
-def drop():
+async def drop():
     MEDIA_FOLDER = os.environ["MEDIA_FOLDER"]
     INGEST_FOLDER = os.environ["INGEST_FOLDER"]
 
@@ -79,4 +85,18 @@ def drop():
 
     col.drop()
 
-    return {"success": True}
+    return SUCCESS
+
+@app.post("/delete")
+async def delete(request: Request):
+    data = await request.json()
+    res = col.delete_one({"path": data["path"]})
+    os.remove(data["path"])
+
+    return SUCCESS
+
+@app.post("/log")
+async def log(request: Request):
+    data = await request.json()
+    print("LOG: " + data["msg"])
+    return SUCCESS

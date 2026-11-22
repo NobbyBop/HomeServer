@@ -41,8 +41,6 @@ def ingest_folder_recursive():
 
         # Note: dot_mov_files will contain live photos, so link and move live photos before other .mov files
         for media in [photos, videos, dot_mov_files]:
-            if ".MOV" in media[0]:
-                print(media)
             for item in media:
                 extIdx = item.rindex(".")
                 filename_minus_ext = item[:extIdx]

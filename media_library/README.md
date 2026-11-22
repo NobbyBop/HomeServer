@@ -20,7 +20,7 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
 - [x] ~~Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...~~ (turns out Apple does not play nice with this.)
     - [x] Also, need to delete the ingest folder once it is uploaded to the media folder.
 - [x] Some `MOV` files are not live photos, they are their own videos. So I have to handle those too.
-- [ ] Implement delete and download (nice to have on mobile)
+- [x] Implement delete and download (nice to have on mobile)
 - [ ] UX Overhaul - make it look profesh
 
 ## Goal: Post-Release
@@ -28,6 +28,7 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
     - [ ] If the uploads fail, it would be better to reject because then you wouldn't know what files are duplicates.
     - [ ] If ingestion fails, you still have a bunch of files in the ingest folder that can probably be ingested...?
 - [ ] ~~When ingesting, put media into folders like `YYYY/MM/` or `Undated`~~
+- [ ] Preserve order of upload when date is not accessible. (first idea: add timestamp field to each mongo document)
 
 ## Field Notes
 
@@ -191,3 +192,16 @@ LOL. It's always something stupid.
 - One thing I think I can improve is that I am writing the file twice - once to `/ingest/` and then once to `/media/`
     - I think I can pivot `ingest_folder_recursive()` to just `mv` the file instead of `cp` then delete.
         - I did.
+- Later in the day, I added MOV support, and began testing locally on my iPhone browser.
+    - I added a server-side logger.
+    - Making web requests on my phone and seeing things happen on my laptop is a really cool experience.
+    - Not too much of a problem, but strange behavior:
+```
+let files = document.getElementById("file_input").files
+...
+document.getElementById("file_input").value = null
+// On my iPhone (Safari), this line actually deletes the value inside files.
+// On my laptop (Firefox), there was no issue.
+```
+    
+    - Next step is nice UI, especially for mobile as that will likely be my main interface.
