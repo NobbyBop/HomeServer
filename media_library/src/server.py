@@ -1,9 +1,11 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, Request
+from typing import BinaryIO
 from fastapi.responses import FileResponse, HTMLResponse
 from jinja2 import Environment, FileSystemLoader
 from .media_ingest import ingest_folder_recursive
 from .db import getCollection
 import os
+import json
 
 app = FastAPI()
 col = getCollection()
@@ -47,7 +49,7 @@ async def root(year: int = 0, month: int = 0, day: int = 0, typ: str = "all", pa
     return output
 
 @app.post("/uploadfile/")
-async def create_upload_file(myfile: UploadFile):
+async def upload_file(myfile: UploadFile):
     INGEST_FOLDER = os.environ["INGEST_FOLDER"]
     if myfile.filename:
         destination = os.path.join(INGEST_FOLDER, myfile.filename)
@@ -59,9 +61,10 @@ async def create_upload_file(myfile: UploadFile):
 @app.post("/ingest")
 def ingest():
     INGEST_FOLDER = os.environ["INGEST_FOLDER"]
-    ingest_folder_recursive()
-    for file in os.listdir(INGEST_FOLDER):
-        os.remove(os.path.join(INGEST_FOLDER, file))
+    try:
+        ingest_folder_recursive()
+    except:
+        return {"error": "Upload failed."}
     return {"success": True}
 
 @app.post("/drop")

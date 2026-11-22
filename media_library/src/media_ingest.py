@@ -74,8 +74,8 @@ def ingest_folder_recursive():
                 new_id = str(uuid4())
                 new_path = os.path.join(new_folder, new_id+"."+ext)
 
-                # Copy the ingested file into a the managed media folder with filename = id
-                shutil.copy(item_path, new_path)
+                # Move the ingested file into a the managed media folder with filename = id
+                shutil.move(item_path, new_path)
 
                 cur["_id"] = new_id
                 cur["path"] = new_path
@@ -89,7 +89,10 @@ def ingest_folder_recursive():
                     live_path = os.path.join(new_folder, live_id+".MOV")
 
                     # Copy the live photo to the media folder.
-                    shutil.copy(os.path.join(media_dir, filename_minus_ext+".MOV"), live_path)
+                    try:
+                        shutil.move(os.path.join(media_dir, filename_minus_ext+".MOV"), live_path)
+                    except FileNotFoundError:
+                        print(f"Warning: Duplicate image names, already assigned live photo '{filename_minus_ext+".MOV"}' to another image.")
                     
                     cur["live"] = os.path.join(new_folder, str(live_id)+".MOV")
 

@@ -162,22 +162,21 @@ startUp()
 
 async function upload() {
     let files = document.getElementById("file_input").files
-    console.log(files)
     if (files.length == 0) {
         document.getElementById("upload_message").textContent = "Error: You must select file(s)."
     } else {
         document.getElementById("file_input").value = null
         document.getElementById("upload_message").textContent = "Collecting..."
-        let data = new FormData()
         for(let file of files) {
+            let data = new FormData()
             data.append("myfile", file)
-            _resp = await fetch("/uploadfile/", {
+            let _resp = await fetch("/uploadfile/", {
                 method: "POST",
                 body: data
             })
         }
         document.getElementById("upload_message").textContent = "Uploading..."
-        _resp = await fetch("/ingest/", {
+        let _resp = await fetch("/ingest/", {
             method: "POST"
         })
         document.getElementById("upload_message").textContent = "Successfully uploaded! Refresh the page to see them."

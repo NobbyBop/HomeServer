@@ -16,10 +16,13 @@ A first draft of this would look like:
 ## Goal: Version 1
 Beyond viewing, I want to add upload support so I can upload files from any device (it will likely be coming from my phone, not my computer).
 - [x] Upload support
-    - [ ] Support large quantities of files at once. (Looks like I will need to do streaming for this. Possibly one stream per file and then close the stream, or stream all the files at once until they are done.)
-- [ ] When ingesting, put media into folders like `YYYY/MM/` or `Undated`
-    - [x] Also, need to delete the ingest folder once it is uploaded to the media folder.
+    - [x] Support large quantities of files at once. (Looks like I will need to do streaming for this. Possibly one stream per file and then close the stream, or stream all the files at once until they are done.) (EDIT: Did not need streaming)
 - [ ] Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...
+- [ ] ~~When ingesting, put media into folders like `YYYY/MM/` or `Undated`~~
+    - [x] Also, need to delete the ingest folder once it is uploaded to the media folder.
+- [ ] Adding resiliency to the system
+    - [ ] If the uploads fail, it would be better to reject because then you wouldn't know what files are duplicates.
+    - [ ] If ingestion fails, you still have a bunch of files in the ingest folder that can probably be ingested...?
 
 ## Field Notes
 
@@ -156,3 +159,30 @@ fetch("http://localhost:8001/uploadfile/", {
 - I also decided it was not really necessary to separate the frontend and backend because it is one simple DB request, and everything is running on my local machine anyway.
     - Now all the behavior is in one place, it is easier to iterate and change. Fewer docker services, less overhead on calls.
     - Obviously this is not a great standard, but mongo DB is basically the backend in and of itself, so I am fine with this.
+
+## 11/22 2026
+- I spent a while this morning trying to get browser-to-server streaming working.
+- Ultimately, not what I needed, but I learned about FileReader, BinaryIO.
+- I was able to parse chunks of a binary file through chunks on the server side, but the issue was actually uploading a stream object.
+    - I think if I was using JavaScript on the server side as well it would be easier to pass a stream object over HTTP and read. FastAPI is a bit confusing with that.
+- That being said, all that was wrong was I accidentally had this:
+```
+...
+let data = new FormData()
+for(let file of files) {
+    
+    data.append("myfile", file)
+...
+```
+instead of this:
+```
+...
+for(let file of files) {
+    let data = new FormData()
+    data.append("myfile", file)
+...
+```
+LOL. It's always something stupid.
+- One thing I think I can improve is that I am writing the file twice - once to `/ingest/` and then once to `/media/`
+    - I think I can pivot `ingest_folder_recursive()` to just `mv` the file instead of `cp` then delete.
+        - I did.
