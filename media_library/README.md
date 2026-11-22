@@ -19,7 +19,7 @@ Beyond viewing, I want to add upload support so I can upload files from any devi
     - [x] Support large quantities of files at once. (Looks like I will need to do streaming for this. Possibly one stream per file and then close the stream, or stream all the files at once until they are done.) (EDIT: Did not need streaming)
 - [x] ~~Might be worth a look into how I would be able to find dates on PNGs. Apple definitely has them saved somehow...~~ (turns out Apple does not play nice with this.)
     - [x] Also, need to delete the ingest folder once it is uploaded to the media folder.
-- [ ] Some `MOV` files are not live photos, they are their own videos. So I have to handle those too.
+- [x] Some `MOV` files are not live photos, they are their own videos. So I have to handle those too.
 - [ ] Implement delete and download (nice to have on mobile)
 - [ ] UX Overhaul - make it look profesh
 
