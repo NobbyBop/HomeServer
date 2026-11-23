@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Media Library</title>
+        <link rel="stylesheet" href="web/index.css">
+    </head>
+    <body>
+
+        <h1>Media Library</h1>
+
+        <h2 id="upload_h2" onclick="toggleCollapse(this.id, 'upload_div')">Upload +</h2>
+        <div id="upload_div" class="collapsible">
+            <input id="file_input" type="file" multiple/>
+            <button id="upload_button" onclick="upload()">Upload</button>
+            <p id="upload_message"></p>
+            <button onclick="deleteEverything()">Delete Everything</button>
+        </div>
+
+        <h2 id="filter_h2" onclick="toggleCollapse(this.id, 'filter_div')">Filter +</h2>
+        <div id="filter_div" class="collapsible">
+            <label for="type_input">Type</label>
+            <select id="type_input">
+                {% if typ == 'all' %}
+                    <option value="all" selected>All</option>
+                {% else %}
+                    <option value="all">All</option>
+                {% endif %}
+
+                {% if typ == 'photo' %}
+                    <option value="photo" selected>Photo</option>
+                {% else %}
+                    <option value="photo">Photo</option>
+                {% endif %}
+
+                {% if typ == 'video' %}
+                    <option value="video" selected>Video</option>
+                {% else %}
+                    <option value="video">Video</option>
+                {% endif %}
+            </select><br/>
+
+            <label for="year_input">Year</label>
+            <input id="year_input" value="{{ year }}"/><br/>
+            <label for="month_input">Month</label>
+            <input id="month_input" value="{{ month }}"/><br/>
+            <label for="day_input">Day</label>
+            <input id = "day_input" value="{{ day }}"/><br/>
+            <button id="filter_button" onclick="filter()">Filter</button>
+        </div>
+
+        <div>
+            <button id="pageLeft" onclick="pageLeft()">&lt</button>
+            <span id="page">{{ page }} / {{ max_page }}</span>
+            <button id="pageRight" onclick="pageRight()">&gt</button>
+        </div>
+
+        <div>
+            <button id="zoomIn" onclick="zoomIn()">+</button>
+            <button id="zoomOut" onclick="zoomOut()">-</button>
+        </div>
+
+        <div id="image_container">
+            {% for item in data %}
+            <div class="media_tile">
+                {% if item.type == 'photo' %}
+                    <img src="{{ item.path }}"/>
+                {% else %}
+                    <video controls>
+                        <source src="{{ item.path }}" type="video/mp4">
+                    </video>
+                {% endif %}
+                {% if item.date %}
+                    <p>{{ item.date.month }}-{{ item.date.day }}-{{ item.date.year }}</p>
+                {% else %}
+                    <p>Undated</p>
+                {% endif %}
+                <button id="{{ item.path }}" onclick="deleteThis(this.id)">Delete</button>
+                <a href="{{ item.path }}" download>Download</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <p hidden id="hidden_page">{{ page }}</p>
+        <p hidden id="hidden_max_page">{{ max_page }}</p>
+        <p hidden id="hidden_typ">{{ typ }}</p>
+        <p hidden id="hidden_year">{{ year }}</p>
+        <p hidden id="hidden_month">{{ month }}</p>
+        <p hidden id="hidden_day">{{ day }}</p>
+        <p hidden id="hidden_zoom">{{ zoom }}</p>
+
+        <script src="web/index.js"></script>
+    </body>
+</html>

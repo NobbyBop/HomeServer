@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+body * {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+video {
+    max-width: 100%;
+}
+
+#image_container {
+    display: grid;
+    align-items: center;
+    gap: 1%
+}
+
+.collapsible[active="true"] {
+    display: block;
+    background-color: gray;
+    border: dotted 2px darkgray;
+}
+
+.collapsible {
+    display: none;
+}
+

@@ -23,4 +23,9 @@ services:
             - "C:\\Users\\nicho\\Desktop\\ingest\\:/ingest/"
         depends_on:
             - media_mongo
+        develop:
+            watch:
+                - action: sync
+                  path: ./media_library/src/
+                  target: /src/
         

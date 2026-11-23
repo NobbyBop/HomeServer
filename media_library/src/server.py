@@ -3,10 +3,11 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, HTMLResponse
 from .media_ingest import ingest_folder_recursive
 from .db import getCollection
+import math
 import os
 
 app = FastAPI()
-templates = Jinja2Templates(".")
+templates = Jinja2Templates("web")
 col = getCollection()
 
 SUCCESS = {"success": True}
@@ -14,9 +15,17 @@ SUCCESS = {"success": True}
 def ERROR(msg):
     return {"error": msg}
 
-@app.get("/media/{filename}", response_class=FileResponse)
+# ADD ROUTES FOR CSS AND JS
+
+MEDIA_FOLDER = os.environ["MEDIA_FOLDER"]
+
+@app.get("/web/{filename}", response_class=FileResponse)
+async def serveWebFile(filename: str):
+    return f"web/{filename}"
+
+@app.get(os.path.join(MEDIA_FOLDER, "{filename}"), response_class=FileResponse)
 async def serveImage(filename: str):
-    return f"/media/{filename}"
+    return os.path.join(MEDIA_FOLDER, f"{filename}")
 
 SORT_QUERY={
     "date.year": 1,
@@ -28,7 +37,7 @@ SORT_QUERY={
 }
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: int = 0, zoom: int = 3):
+async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, typ: str = "all", page: int = 1, zoom: int = 3):
     filters = []
     if year != 0:
         filters.append({"date.year": int(year)})
@@ -39,17 +48,23 @@ async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, ty
     if typ != "all":
         filters.append({"type": typ})
 
-    page_size = 48
-    skip = page_size * int(page)
-
     query = {"$and": filters} if filters != [] else {}
     count = col.count_documents(query)
+    page_size = 48
+    max_page = math.ceil(count/page_size)
+
+    if page < 1:
+        page = 1
+    elif page > max_page:
+        page = max_page
+
+    skip = page_size * int(page-1)
     media = list(col.find(query, sort=SORT_QUERY).skip(skip).limit(page_size))
 
     return templates.TemplateResponse(
         request=request, 
         name="index.jinja", 
-        context={"data":media, "count":count, "page":page, "year":year, "month":month, "day":day, "typ":typ, "zoom":zoom}
+        context={"data":media, "count":count, "page":page, "max_page":max_page, "year":year, "month":month, "day":day, "typ":typ, "zoom":zoom}
     )
 
 @app.post("/uploadfile/")

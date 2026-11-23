@@ -1,115 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Media Library</title>
-    </head>
-    <body>
-
-        <h1>Media Library</h1>
-
-        <div>
-            <input id="file_input" type="file" multiple/>
-            <button id="upload_button" onclick="upload()">Upload</button>
-            <p id="upload_message"></p>
-        </div>
-
-        <div><button onclick="deleteEverything()">Delete Everything</button></div>
-
-        <div>
-            <label for="type_input">Type</label>
-            <select id="type_input">
-                {% if typ == 'all' %}
-                    <option value="all" selected>All</option>
-                {% else %}
-                    <option value="all">All</option>
-                {% endif %}
-
-                {% if typ == 'photo' %}
-                    <option value="photo" selected>Photo</option>
-                {% else %}
-                    <option value="photo">Photo</option>
-                {% endif %}
-
-                {% if typ == 'video' %}
-                    <option value="video" selected>Video</option>
-                {% else %}
-                    <option value="video">Video</option>
-                {% endif %}
-            </select>
-        </div>
-
-        <div> 
-            <label for="year_input">Year</label>
-            <input id="year_input" value="{{ year }}"/>
-            <label for="month_input">Month</label>
-            <input id="month_input" value="{{ month }}"/>
-            <label for="day_input">Day</label>
-            <input id = "day_input" value="{{ day }}"/>
-            <button id="filter_button" onclick="filter()">Filter</button>
-        </div>
-
-        <div>
-            <button id="pageLeft" onclick="pageLeft()">&lt</button>
-            <span id="page">{{ page }} / {{ (count // 48)|round(0, 'ceil') }}</span>
-            <button id="pageRight" onclick="pageRight()">&gt</button>
-        </div>
-
-        <div>
-            <button id="zoomIn" onclick="zoomIn()">+</button>
-            <button id="zoomOut" onclick="zoomOut()">-</button>
-        </div>
-
-        <div id="image_container">
-            {% for item in data %}
-            <div>
-                {% if item.type == 'photo' %}
-                    <img src="{{ item.path }}"/>
-                {% else %}
-                    <video controls>
-                        <source src="{{ item.path }}" type="video/mp4">
-                    </video>
-                {% endif %}
-                {% if item.date %}
-                    <p>{{ item.date.month }}-{{ item.date.day }}-{{ item.date.year }}</p>
-                {% else %}
-                    <p>Undated</p>
-                {% endif %}
-                <button id="{{ item.path }}" onclick="deleteThis(this.id)">Delete</button>
-                <a href="{{ item.path }}" download>Download</a>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <p hidden id="hidden_page">{{ page }}</p>
-        <p hidden id="hidden_max_page">{{ (count // 48)|round(0, 'ceil') }}</p>
-        <p hidden id="hidden_typ">{{ typ }}</p>
-        <p hidden id="hidden_year">{{ year }}</p>
-        <p hidden id="hidden_month">{{ month }}</p>
-        <p hidden id="hidden_day">{{ day }}</p>
-        <p hidden id="hidden_zoom">{{ zoom }}</p>
-
-    </body>
-    <style>
-body {
-    background-color: black;
-    color: white;
-}
-
-img {
-    max-width: 100%;
-}
-
-video {
-    max-width: 100%;
-}
-
-#image_container {
-    display: grid;
-    align-items: center;
-    gap: 1%
-}
-    </style>
-    <script>
 async function log(msg) {
     let _resp = await fetch("/log/", {
         method: "POST",
@@ -132,7 +20,7 @@ function getJinjaVariables() {
 
 function pageLeft() {
     let vars = getJinjaVariables()
-    if (vars.page > 0) {
+    if (vars.page > 1) {
         window.location.href = `/?page=${vars.page - 1}&typ=${vars.typ}&year=${vars.year}&month=${vars.month}&day=${vars.day}&zoom=${vars.zoom}`
     }
 }
@@ -219,5 +107,15 @@ async function deleteEverything() {
     })
     window.location.reload()
 }
-    </script>
-</html>
+
+function toggleCollapse(header_id, div_id){
+    let state = document.getElementById(div_id).getAttribute("active")
+    if(state == null){
+        document.getElementById(header_id).textContent = document.getElementById(header_id).textContent.replace("+", "-")
+        document.getElementById(div_id).setAttribute("active", "true")
+    } else {
+        document.getElementById(header_id).textContent = document.getElementById(header_id).textContent.replace("-", "+")
+        document.getElementById(div_id).removeAttribute("active")
+    }
+    
+}
