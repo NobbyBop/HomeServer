@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="web/index.css">
     </head>
     <body>
+    <div id="main_div">
 
         <h1>Media Library</h1>
 
@@ -48,36 +49,38 @@
             <button id="filter_button" onclick="filter()">Filter</button>
         </div>
 
-        <div>
-            <button id="pageLeft" onclick="pageLeft()">&lt</button>
-            <span id="page">{{ page }} / {{ max_page }}</span>
-            <button id="pageRight" onclick="pageRight()">&gt</button>
-        </div>
+        <div id="navigation">
+            <div id="page_left_div"><button id="pageLeft" onclick="pageLeft()">&lt</button></div>
+                <span id="page">{{ page }} / {{ max_page }}</span>
+            <div id="page_right_div"><button id="pageRight" onclick="pageRight()">&gt</button></div>
 
-        <div>
-            <button id="zoomIn" onclick="zoomIn()">+</button>
-            <button id="zoomOut" onclick="zoomOut()">-</button>
+            <div id="zoom_div">
+                <button id="zoomIn" onclick="zoomIn()">+</button>
+                <button id="zoomOut" onclick="zoomOut()">-</button>
+            </div>
         </div>
 
         <div id="image_container">
             {% for item in data %}
-            <div class="media_tile">
+            <div class="media_item">
                 {% if item.type == 'photo' %}
-                    <img src="{{ item.path }}"/>
+                    <img class="tile_img" src="{{ item.path }}" onclick="fullscreenPhoto(this.src)"/>
                 {% else %}
-                    <video controls>
-                        <source src="{{ item.path }}" type="video/mp4">
-                    </video>
+                    <div class="video_div">
+                        <video class="tile_video" onclick="fullscreenVideo(this.src, `video`)">
+                            <source src="{{ item.path }}" type="video/mp4">
+                        </video>
+                        <span class="video_icon">VIDEO</span>
+                    </div>
                 {% endif %}
-                {% if item.date %}
-                    <p>{{ item.date.month }}-{{ item.date.day }}-{{ item.date.year }}</p>
-                {% else %}
-                    <p>Undated</p>
-                {% endif %}
-                <button id="{{ item.path }}" onclick="deleteThis(this.id)">Delete</button>
-                <a href="{{ item.path }}" download>Download</a>
             </div>
             {% endfor %}
+        </div>
+
+        <div hidden id="fullscreen_photo_div" onclick="unFullscreenPhoto()">
+        </div>
+
+        <div hidden id="fullscreen_photo_div" >
         </div>
         
         <p hidden id="hidden_page">{{ page }}</p>
@@ -89,5 +92,7 @@
         <p hidden id="hidden_zoom">{{ zoom }}</p>
 
         <script src="web/index.js"></script>
+
+    </div>
     </body>
 </html>

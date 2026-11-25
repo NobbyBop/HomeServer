@@ -119,3 +119,20 @@ function toggleCollapse(header_id, div_id){
     }
     
 }
+
+function fullscreenPhoto(src) {
+    let fullscreen_div = document.getElementById("fullscreen_photo_div")
+    let img = document.createElement('img')
+    img.src = src
+    fullscreen_div.appendChild(img)
+    fullscreen_div.toggleAttribute("hidden")
+}
+
+function unFullscreenPhoto() {
+    let fullscreen_div = document.getElementById("fullscreen_photo_div")
+    fullscreen_div.toggleAttribute("hidden")
+    while(fullscreen_div.firstChild){
+        fullscreen_div.remove(fullscreen_div.firstChild)
+    }
+    hidden_photo.removeAttribute("src")
+}

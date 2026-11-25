@@ -15,8 +15,6 @@ SUCCESS = {"success": True}
 def ERROR(msg):
     return {"error": msg}
 
-# ADD ROUTES FOR CSS AND JS
-
 MEDIA_FOLDER = os.environ["MEDIA_FOLDER"]
 
 @app.get("/web/{filename}", response_class=FileResponse)
@@ -51,11 +49,11 @@ async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, ty
     query = {"$and": filters} if filters != [] else {}
     count = col.count_documents(query)
     page_size = 48
-    max_page = math.ceil(count/page_size)
+    max_page = max(1, math.ceil(count/page_size))
 
     if page < 1:
         page = 1
-    elif page > max_page:
+    if page > max_page:
         page = max_page
 
     skip = page_size * int(page-1)
