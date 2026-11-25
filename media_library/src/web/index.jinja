@@ -5,6 +5,18 @@
         <link rel="stylesheet" href="web/index.css">
     </head>
     <body>
+
+    <div hidden id="fullscreen_photo_div">
+        <h1>This is a test modal</h1>
+        <p>image would go here</p>
+        <img src="example.com" id="hidden_img" onclick="unFullscreenPhoto()"/>
+        <button>Close</button>
+        <button>Download</button>
+        <button>Delete</button>
+    </div>
+
+    <div id="fullscreen_video_div" ></div>
+
     <div id="main_div">
 
         <h1>Media Library</h1>
@@ -75,12 +87,6 @@
                 {% endif %}
             </div>
             {% endfor %}
-        </div>
-
-        <div hidden id="fullscreen_photo_div" onclick="unFullscreenPhoto()">
-        </div>
-
-        <div hidden id="fullscreen_photo_div" >
         </div>
         
         <p hidden id="hidden_page">{{ page }}</p>

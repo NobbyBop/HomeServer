@@ -75,10 +75,24 @@ video {
     right: 20px;
 }
 
-#fullscreen_div{
-    position:fixed;
+#fullscreen_photo_div {
+    position: fixed;
     top: 0px;
-    left:0px;
-    width: 100%;
+    left: 0px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100%;
+    width: 100%;
+    background-color: red;
+}
+
+#fullscreen_photo_div[hidden] {
+  display: none;
+}
+
+#hidden_img {
+    max-width: 50%;
 }
