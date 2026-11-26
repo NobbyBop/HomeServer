@@ -42,13 +42,13 @@ async def root(request: Request, year: int = 0, month: int = 0, day: int = 0, ty
     if month != 0:
         filters.append({"date.month": int(month)})
     if day != 0:
-        filters.append({"date.day": int(day)})
+        filters.append({"date.day": int(day)}) 
     if typ != "all":
         filters.append({"type": typ})
 
     query = {"$and": filters} if filters != [] else {}
     count = col.count_documents(query)
-    page_size = 48
+    page_size = 75
     max_page = max(1, math.ceil(count/page_size))
 
     if page < 1:

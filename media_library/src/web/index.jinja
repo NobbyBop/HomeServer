@@ -7,12 +7,9 @@
     <body>
 
     <div hidden id="fullscreen_photo_div">
-        <h1>This is a test modal</h1>
-        <p>image would go here</p>
-        <img src="example.com" id="hidden_img" onclick="unFullscreenPhoto()"/>
-        <button>Close</button>
-        <button>Download</button>
-        <button>Delete</button>
+        <button class="exit_modal_button" onclick="unFullscreenPhoto()">&times</button>
+        <p id="fullscreen_date"></p>
+        <img src="example.com" id="hidden_img"/>
     </div>
 
     <div id="fullscreen_video_div" ></div>
@@ -76,6 +73,7 @@
             {% for item in data %}
             <div class="media_item">
                 {% if item.type == 'photo' %}
+                    <p hidden id="date:{{ item.path }}">{{ item.date.month }}/{{ item.date.day }}/{{ item.date.year }}</p>
                     <img class="tile_img" src="{{ item.path }}" onclick="fullscreenPhoto(this.src)"/>
                 {% else %}
                     <div class="video_div">

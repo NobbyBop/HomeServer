@@ -18,8 +18,11 @@ video {
 #image_container {
     display: grid;
     align-items: center;
-    gap: 1%;
     padding: 5%;
+}
+
+.media_item {
+    padding: 1%;
 }
 
 .tile_img, .tile_video {
@@ -58,35 +61,39 @@ video {
 
 #navigation {
     position:fixed;
-    top: 20px;
+    top: 5%;
     left: 20px;
 }
 
 #page_left_div {
     position:fixed;
-    top: 50%;
+    top: 10%;
     left: 20px;
     height: 100%
 }
 
 #page_right_div {
     position:fixed;
-    top: 50%;
+    top: 10%;
     right: 20px;
 }
 
 #fullscreen_photo_div {
     position: fixed;
+
     top: 0px;
     left: 0px;
+    height: 100%;
+    width: 100%;
+
     z-index: 1;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    background-color: red;
+    
+    background-color: rgba(0, 0, 0, 0.95);
 }
 
 #fullscreen_photo_div[hidden] {
@@ -94,5 +101,29 @@ video {
 }
 
 #hidden_img {
-    max-width: 50%;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+@media screen and (max-width: 1000px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    label, input, select, span, button {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+    
+    #hidden_img {
+        max-width: 100%;
+        max-height: 100%;
+    }   
 }

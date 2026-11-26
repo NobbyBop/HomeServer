@@ -38,7 +38,7 @@ function filter() {
     let typ = document.getElementById("type_input").value
     let year = Number.parseInt(document.getElementById("year_input").value)
     let month = Number.parseInt(document.getElementById("month_input").value)
-    let day = Number.parseInt(document.getElementById("year_input").value)
+    let day = Number.parseInt(document.getElementById("day_input").value)
 
     window.location.href = `/?page=0&typ=${typ}&year=${year}&month=${month}&day=${day}&zoom=${vars.zoom}`
 }
@@ -58,12 +58,6 @@ function zoomOut() {
         document.getElementById("hidden_zoom").textContent = String(vars.zoom + 1) 
     }
 }
-
-function startUp() {
-    let vars = getJinjaVariables()
-    document.getElementById("image_container").style.gridTemplateColumns = "1fr ".repeat(vars.zoom) 
-}
-startUp()
 
 async function upload() {
     document.getElementById("upload_button").setAttribute("disabled", "true")
@@ -131,3 +125,9 @@ function fullscreenPhoto(src) {
     img.setAttribute("src", src)
     fullscreen_div.removeAttribute("hidden")
 }
+
+function startUp() {
+    let vars = getJinjaVariables()
+    document.getElementById("image_container").style.gridTemplateColumns = "1fr ".repeat(vars.zoom) 
+}
+startUp()
